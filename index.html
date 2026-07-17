@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+    <title>Adversity Media | Your Dream Designs Come to Life - Complete Digital Marketing Solutions</title>
+    <meta name="description" content="Adversity Media: Leading digital marketing agency in Hyderabad offering SEO, web development, mobile apps, branding, and creative design solutions. Transform your business with our expert digital strategies.">
+    <meta name="keywords" content="digital marketing agency Hyderabad, SEO services India, web development, mobile app development, branding services, UI/UX design, social media marketing, Adversity Media">
+    <meta name="author" content="Adversity Media">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Adversity Media | Complete Digital Marketing Solutions">
+    <meta property="og:description" content="Transform your business with our expert digital marketing, web development, and branding services. Your dream designs come to life.">
+    <meta property="og:image" content="https://yourdomain.com/assets/images/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Adversity Media">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Adversity Media | Digital Marketing Solutions">
+    <meta name="twitter:description" content="Complete digital marketing agency offering SEO, web development, mobile apps, and branding services.">
+    <meta name="twitter:image" content="https://yourdomain.com/assets/images/twitter-card.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com/">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/android-chrome-512x512.png">
+    <meta name="theme-color" content="#2B4C8F">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Critical CSS - Inline for Performance -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        .preloader{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#2B4C8F 0%,#6B46C1 50%,#0EA5E9 100%);display:flex;align-items:center;justify-content:center;z-index:9999;transition:0.5s ease}
+        .preloader.hidden{opacity:0;visibility:hidden}
+        .loading-dots{display:flex;justify-content:center;gap:0.5rem}
+        .loading-dots span{width:12px;height:12px;background:#FF8C42;border-radius:50%;animation:loadingBounce 1.4s ease-in-out infinite both}
+        .loading-dots span:nth-child(2){animation-delay:-0.32s}
+        .loading-dots span:nth-child(3){animation-delay:-0.16s}
+        @keyframes loadingBounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+        body{margin:0;font-family:'Inter',sans-serif;overflow-x:hidden}
+        .navbar{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);transition:all 0.3s ease}
+    </style>
+    
+    <!-- Google Fonts - Optimized Loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Custom CSS Files -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/animations.css" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="assets/images/adversity-media-logo.png" as="image">
+    <link rel="preload" href="assets/images/hero-banner(1).png" as="image">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Adversity Media",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/assets/images/adversity-media-logo.png",
+        "description": "Complete digital marketing agency offering SEO, web development, mobile apps, branding services in Hyderabad, India",
+        "foundingDate": "2024",
+        "founder": {
+            "@type": "Person",
+            "name": "Sai Kumar Kadagala"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressCountry": "IN"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-7330924511",
+            "contactType": "customer service",
+            "email": "adversitymedia.in@gmail.com"
+        },
+        "sameAs": [
+            "https://www.facebook.com/adversitymedia",
+            "https://www.instagram.com/adversitymedia",
+            "https://www.linkedin.com/company/adversitymedia",
+            "https://twitter.com/adversitymedia"
+        ],
+        "offers": {
+            "@type": "Service",
+            "serviceType": ["Digital Marketing", "Web Development", "Mobile App Development", "SEO Services", "Branding"]
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Skip Link for Accessibility -->
+    <!-- <a href="#main-content" class="skip-link">Skip to main content</a> -->
+    
+    <!-- Preloader -->
+    <div class="preloader" id="preloader" aria-label="Loading">
+        <div class="preloader-content">
+            <div class="logo-container">
+                <img src="./assets/images/adversity-media-logo.png" style="height: 200px; width: 200px;" alt="Adversity Media"><br><br>
+                <div class="loading-dots" role="status" aria-label="Loading content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar d-none d-md-flex" role="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="top-info">
+                        <span class="me-3">
+                            <i class="fas fa-phone me-2" aria-hidden="true"></i>
+                            <a href="tel:+917330924511" aria-label="Call us at +91 7330924511">+91 7330924511</a>
+                        </span>
+                        <span class="me-3">
+                            <i class="fas fa-envelope me-2" aria-hidden="true"></i>
+                            <a href="mailto:adversitymedia.in@gmail.com" aria-label="Email us at adversitymedia.in@gmail.com">adversitymedia.in@gmail.com</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="top-social">
+                        <a href="https://facebook.com/adversitymedia" class="social-link me-2" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://instagram.com/adversitymedia" class="social-link me-2" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/adversitymedia" class="social-link me-2" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://twitter.com/adversitymedia" class="social-link me-2" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <!-- <a href="https://behance.net/adversitymedia" class="social-link" aria-label="View our work on Behance" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-behance" aria-hidden="true"></i>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNavbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" aria-label="Adversity Media Homepage">
+                <img src="assets/images/adversity-media-logo.png" alt="Adversity Media Logo" class="logo-img" width="100" height="auto">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a class="nav-link active" href="#home" role="menuitem" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#about" role="menuitem">About Us</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#services" role="menuitem">Our Services</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#portfolio" role="menuitem">Portfolio</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="clients.html" role="menuitem">Clients</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="blog.html" role="menuitem">Blog</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#contact" role="menuitem">Contact</a>
+                    </li>
+                
+                
+                <div class="navbar-actions ms-3">
+                    <a href="#contact" class="btn btn-primary" aria-label="Get started with our services" style="background: var(--gradient-hero); border: 0px; ">Get Started</a>
+                </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home" role="banner" aria-labelledby="hero-title">
+            <div class="hero-background" aria-hidden="true">
+                <div class="hero-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <div class="hero-badge animate__animated animate__fadeInUp">
+                                <i class="fas fa-award me-2" aria-hidden="true"></i>
+                                5+ Years of Excellence
+                            </div>
+                            
+                            <div class="hero-text-wrapper">
+                                <h1 id="hero-title" class="hero-title animate__animated animate__fadeInUp animate__delay-1s">
+                                    <span class="hero-intro">YOUR</span>
+                                    <span class="hero-typed-text" id="typedText" aria-label="Dynamic text animation"></span>
+                                </h1>
+                            </div>
+                            
+                            <p class="hero-description animate__animated animate__fadeInUp animate__delay-2s">
+                                Complete digital marketing solutions with cutting-edge technology. We transform 
+                                businesses through innovative strategies that deliver measurable results and drive 
+                                sustainable growth in the digital landscape.
+                            </p>
+                            
+                            <div class="hero-actions animate__animated animate__fadeInUp animate__delay-3s">
+                                <a href="#contact" class="btn btn-primary btn-large me-3" aria-label="Start discussing your project">
+                                    Let's Discuss
+                                    <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+                                </a>
+                                <a href="#portfolio" class="btn btn-outline btn-large" aria-label="View our portfolio of work">
+                                    View Portfolio
+                                    <i class="fas fa-play ms-2" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="hero-visual animate__animated animate__fadeInRight animate__delay-2s">
+                            <img src="assets/images/hero-banner(1).png" alt="Digital marketing services illustration showing modern technology and business growth" class="img-fluid" loading="eager" width="670" height="670">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated Waves -->
+            <div class="hero-waves" aria-hidden="true">
+                <svg viewBox="0 24 150 28" preserveAspectRatio="none" role="img" aria-label="Decorative wave animation">
+                    <defs>
+                        <path id="wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
+                    </defs>
+                    <g class="wave-animation">
+                        <use href="#wave" x="48" y="0" fill="rgba(255,255,255,0.7)"/>
+                        <use href="#wave" x="48" y="3" fill="rgba(255,255,255,0.5)"/>
+                        <use href="#wave" x="48" y="5" fill="rgba(255,255,255,0.3)"/>
+                        <use href="#wave" x="48" y="7" fill="#ffffff"/>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about" aria-labelledby="about-title">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="about-image-wrapper">
+                            <img src="assets/images/about-team.jpg" alt="Adversity Media team working on digital marketing strategies" class="img-fluid about-main-img" loading="lazy" width="500" height="400">
+                            <div class="experience-badge glass-morphism">
+                                <h2 class="experience-number">5+ <span>Years</span></h2>
+                                <p>Of Experience in Software & Digital Marketing Agency</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="about-content">
+                            <span class="section-badge">Get To Know Us</span>
+                            <h2 id="about-title" class="section-title">
+                                A Full Service Digital <span class="gradient-text">Marketing Agency</span>
+                            </h2>
+                            <p class="about-description">
+                                Adversity Media is the complete digital marketing company with solutions for any 
+                                challenges in the digital field. We help improve ROI through the best digital 
+                                marketing services, SEO, web development, mobile apps, and content marketing 
+                                to deliver visible results in your business growth.
+                            </p>
+                            <p class="about-description">
+                                We build effective strategies to help you reach customers and prospects across 
+                                the entire web, ensuring your brand stands out in today's competitive marketplace.
+                            </p>
+                            
+                            <div class="about-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                    <span>Award-Winning Digital Strategies</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                    <span>Expert Team of Professionals</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                    <span>Cutting-Edge Technology</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                    <span>24/7 Support & Maintenance</span>
+                                </div>
+                            </div>
+                            
+                            <div class="about-actions">
+                                <a href="#contact" class="btn btn-primary" aria-label="Get started with our services today" style="background: var(--gradient-hero); border: 0px;">Get Started Today</a>
+                            </div>
+                            
+                            <!-- Founder Info -->
+                            <div class="founder-info">
+                                <div class="founder-image">
+                                    <img src="assets/images/founder-ceo.jpg" alt="Sai Kumar Kadagala, Founder and CEO of Adversity Media" loading="lazy" width="60" height="60">
+                                </div>
+                                <div class="founder-details">
+                                    <h4>Sai Kumar Kadagala</h4>
+                                    <span>Founder & CEO</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section" aria-labelledby="stats-title">
+            <div class="container">
+                <h2 id="stats-title" class="visually-hidden">Our Achievements and Statistics</h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stat-item text-center" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stat-icon">
+                                <img src="assets/icons/projects.png" alt="Projects completed icon" loading="lazy" width="50" height="40">
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" data-target="450" aria-label="450 projects completed">100+</h3><br>
+                                <!-- <p class="stat-label">Projects Completed</p> -->
+                                <h4  class="stat-label">Projects Completed</h4>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stat-item text-center" data-aos="fade-up" data-aos-delay="200">
+                            <div class="stat-icon">
+                                <img src="assets/icons/ongoing.png" alt="Ongoing projects icon" loading="lazy" width="50" height="40">
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" data-target="85" aria-label="85 projects in hand">10+</h3><br>
+                                <!-- <p class="stat-label">In Hand Projects</p> -->
+                                <h4 class="stat-label">In Hand <br> Projects</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stat-item text-center" data-aos="fade-up" data-aos-delay="300">
+                            <div class="stat-icon">
+                                <img src="assets/icons/clients.png" alt="Happy clients icon" loading="lazy" width="50" height="40">
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" data-target="300" aria-label="300 happy clients">20+</h3><br>
+                                <!-- <p class="stat-label">Happy Clients</p> -->
+                                 <h4 class="stat-label">Happy <br> Clients</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stat-item text-center" data-aos="fade-up" data-aos-delay="400">
+                            <div class="stat-icon">
+                                <img src="assets/icons/awards.png" alt="Awards won icon" loading="lazy" width="50" height="40">
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" data-target="25" aria-label="25 awards won">10+</h3><br>
+                                <!-- <p class="stat-label">Awards Won</p> -->
+                                 <h4 class="stat-label">Awards Won</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section" id="services" aria-labelledby="services-title">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">Services We're Offering</span>
+                    <h2 id="services-title" class="section-title">
+                        Committed to Deliver Top <span class="gradient-text">Quality Services</span>
+                    </h2>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- Digital Marketing Service -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <article class="service-card glass-morphism">
+                            <div class="service-icon">
+                                <img src="assets/icons/digital-marketing.png" alt="Digital marketing services icon" loading="lazy" width="80" height="80">
+                            </div>
+                            <h3 class="service-title">Digital Marketing</h3>
+                            <p class="service-description">
+                                Boost Your Business with Our Digital Marketing Expertise!
+                            </p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> SEO Services</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Social Media Marketing</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Content Marketing</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Page Optimization</li>
+                            </ul>
+                            <div class="service-action">
+                                <a href="#contact" class="service-link" aria-label="Learn more about digital marketing services">
+                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <!-- App Development Service -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <article class="service-card glass-morphism">
+                            <div class="service-icon">
+                                <img src="assets/icons/app-development.png" alt="Mobile app development services icon" loading="lazy" width="80" height="80">
+                            </div>
+                            <h3 class="service-title">App Development</h3>
+                            <p class="service-description">
+                                Comprehensive app development services from design to deployment for all platforms.
+                            </p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Web Based Apps</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> iOS Applications</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Android Applications</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Software Development</li>
+                            </ul>
+                            <div class="service-action">
+                                <a href="#contact" class="service-link" aria-label="Learn more about app development services">
+                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <!-- Website Development Service -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <article class="service-card glass-morphism">
+                            <div class="service-icon">
+                                <img src="assets/icons/web-development.png" alt="Website development services icon" loading="lazy" width="80" height="80">
+                            </div>
+                            <h3 class="service-title">Website Development</h3>
+                            <p class="service-description">
+                                Responsive, mobile-friendly websites with stunning design and seamless user experiences.
+                            </p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Website Development</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Content Writing</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> UI/UX Design</li>
+                                <li><i class="fas fa-arrow-right" aria-hidden="true"></i> Interface Design</li>
+                            </ul>
+                            <div class="service-action">
+                                <a href="#contact" class="service-link" aria-label="Learn more about website development services">
+                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section" id="portfolio" aria-labelledby="portfolio-title">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">Our Work</span>
+                    <h2 id="portfolio-title" class="section-title">
+                        Our <span class="gradient-text">Portfolio</span>
+                    </h2>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- Portfolio Items -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <article class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="./assets/images/portfolio/18a5aa58-206d-4c5c-bfd7-1ed6d770c7ed.jpg" alt="Brand identity design project showcasing complete branding solution" class="img-fluid" loading="lazy" width="400" height="300">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-content">
+                                        <h4></h4>
+                                        <p></p>
+                                        <a aria-label="View brand identity design project details">
+                                            <i aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <article class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="assets/images/portfolio/72ff2fa8-f4a0-4a4c-ab4b-31f5b749310c.jpg" alt="E-commerce website project showing modern online store design" class="img-fluid" loading="lazy" width="400" height="300">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-content">
+                                        <h4></h4>
+                                        <p></p>
+                                        <a  aria-label="View e-commerce website project details">
+                                            <i aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <article class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="./assets/images/portfolio/af63635a-3dd6-4268-b568-cb4db3eabc6d.jpg" alt="Mobile application project showcasing cross-platform app development" class="img-fluid" loading="lazy" width="400" height="300">
+                                <div class="portfolio-overlay" >
+                                    <div class="portfolio-content" >
+                                        <h4></h4>
+                                        <p></p>
+                                        <a  aria-label="View mobile application project details">
+                                            <i  aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <!-- Additional portfolio items -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <article class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="assets/images/portfolio/7ac44cf2-65f0-4493-a789-3c935b8014b3.jpg" alt="Web design project showcase" class="img-fluid" loading="lazy" width="400" height="300">
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <article class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="assets/images/portfolio/3d9c8177-effb-4753-8479-dd82dd899b61.jpg" alt="Digital marketing campaign results" class="img-fluid" loading="lazy" width="400" height="300">
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <article class="portfolio-item">
+                            <div class="portfolio-image">
+                                <img src="assets/images/portfolio/28af1970-3ec4-4b62-82b6-28b7d6a6a36f.jpg" alt="UI/UX design project example" class="img-fluid" loading="lazy" width="400" height="300">
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+    <a href="portfolio.html" class="btn btn-portfolio" aria-label="View our complete portfolio">
+        See More Portfolio
+        <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+    </a>
+</div>
+
+                
+        
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="contact-info">
+                            <span class="section-badge">Get In Touch</span>
+                            <h2 id="contact-title" class="section-title">
+                                Ready to Start Your <span class="gradient-text">Digital Journey?</span>
+                            </h2>
+                            <p class="contact-description">
+                                Let's discuss your project and create something amazing together. 
+                                Our team is ready to bring your vision to life.
+                            </p>
+                            
+                            <div class="contact-items">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Call Us</h4>
+                                        <p><a href="tel:+917330924511">+91 7330924511</a></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Email Us</h4>
+                                        <p><a href="mailto:adversitymedia.in@gmail.com">adversitymedia.in@gmail.com</a></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="contact-details">
+                                        <h4>Visit Us</h4>
+                                        <p>Hyderabad, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <form class="contact-form glass-morphism" id="contactForm" aria-labelledby="form-title" novalidate>
+                            <h3 id="form-title" class="form-title">Send Us a Message</h3>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="firstName" class="visually-hidden">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required aria-required="true">
+                                        <div class="invalid-feedback">Please enter your first name.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lastName" class="visually-hidden">Last Name</label>
+                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required aria-required="true">
+                                        <div class="invalid-feedback">Please enter your last name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="visually-hidden">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Email Address" required aria-required="true">
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="visually-hidden">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Phone Number" aria-describedby="phone-help">
+                                <small id="phone-help" class="form-text text-muted visually-hidden">Optional: Include country code for international numbers</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="service" class="visually-hidden">Select Service</label>
+                                <select id="service" name="service" required aria-required="true">
+                                    <option value="">Select Service</option>
+                                    <option value="seo">SEO Services</option>
+                                    <option value="web-design">Web Development</option>
+                                    <option value="digital-marketing">Digital Marketing</option>
+                                    <option value="branding">Branding Services</option>
+                                    <option value="mobile-apps">Mobile Apps</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a service.</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="visually-hidden">Project Message</label>
+                                <textarea id="message" name="message" placeholder="Tell us about your project..." rows="5" required aria-required="true"></textarea>
+                                <div class="invalid-feedback">Please tell us about your project.</div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary-send btn-full" aria-describedby="submit-status">
+                                <span class="button-text">Send Message</span>
+                                <span class="button-loading d-none">
+                                    <i class="fas fa-spinner fa-spin me-2" aria-hidden="true"></i>
+                                    Sending...
+                                </span>
+                                <i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>
+                            </button>
+                            <div id="submit-status" class="form-status mt-3" role="status" aria-live="polite"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark" role="contentinfo" aria-labelledby="footer-title">
+        <div class="container">
+            <h2 id="footer-title" class="visually-hidden">Footer Information</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <img src="assets/images/adversity-media-logo-white.png" alt="Adversity Media Logo" class="footer-logo mb-3" loading="lazy" width="150" height="auto">
+                        <p class="footer-description">
+                            Adversity Media is the complete digital marketing company with solutions for 
+                            any challenges in the digital field. Your dream designs come to life.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://facebook.com/adversitymedia" class="social-link me-2" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" class="social-link me-2" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" class="social-link me-2" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" class="social-link me-2" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <!-- <a href="https://behance.net/adversitymedia" class="social-link" aria-label="View our work on Behance" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-behance" aria-hidden="true"></i>
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="/careers">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Our Services</h4>
+                        <ul>
+                            <li><a href="#services">Digital Marketing</a></li>
+                            <li><a href="#services">Web Development</a></li>
+                            <li><a href="#services">Mobile Apps</a></li>
+                            <li><a href="#services">Branding Services</a></li>
+                            <li><a href="#services">UI/UX Design</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-2">
+                            <i class="fas fa-map-marker-alt me-2" aria-hidden="true"></i>
+                            <span>Hyderabad, India</span>
+                        </div>
+                        <div class="contact-item mb-2">
+                            <i class="fas fa-phone me-2" aria-hidden="true"></i>
+                            <a href="tel:+917330924511">+91 7330924511</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope me-2" aria-hidden="true"></i>
+                            <a href="mailto:adversitymedia.in@gmail.com">adversitymedia.in@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <hr class="footer-divider"> -->
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer-bottom text-center">
+                        <p>&copy; 2025 Adversity Media. All Rights Reserved. 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://api.whatsapp.com/send?phone=917330924511&text=Hi%2C%20I%27m%20interested%20in%20your%20digital%20marketing%20services" 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer" 
+       aria-label="Contact us on WhatsApp for quick support">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top of page">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- JavaScript Libraries - Optimized Loading -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/portfolio.js" defer></script>
+    
+    <!-- Inline Critical JavaScript -->
+    <script>
+        // Critical JavaScript that must run immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide preloader
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                }, 1000);
+            }
+            
+            // Initialize Typed.js
+            if (typeof Typed !== 'undefined') {
+                new Typed('#typedText', {
+                    strings: [
+                        'DREAM DESIGNS COME TO LIFE.',
+                       ' VISION BECOMES REALITY.',
+                        'IDEAS TRANSFORM INTO SUCCESS.',
+                        'BRAND STANDS OUT.'
+
+                    ],
+                    typeSpeed: 100,
+                    backSpeed: 40,
+                    loop: true,
+                    showCursor: false
+                });
+            }
+
+            // Initialize AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                    disable: 'mobile' // Disable on mobile for better performance
+                });
+            }
+            
+            // Form validation and submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Add your form submission logic here
+                    console.log('Form submitted');
+                });
+            }
+        });
+        
+        // Performance monitoring
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (entry.entryType === 'navigation') {
+                        console.log('Page load time:', entry.loadEventEnd - entry.fetchStart);
+                    }
+                }
+            });
+            observer.observe({entryTypes: ['navigation']});
+        }
+    </script>
+</body>
+</html>

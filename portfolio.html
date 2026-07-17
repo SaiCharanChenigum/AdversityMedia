@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Adversity Media | Complete Digital Solutions</title>
+    <meta name="description" content="Explore our portfolio of 106+ successful projects including digital marketing campaigns, website development, mobile applications, and branding solutions.">
+    <meta name="keywords" content="portfolio, digital marketing projects, website development, mobile apps, branding design, case studies">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/android-chrome-512x512.png">
+    <meta name="theme-color" content="#2B4C8F">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS Files -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/animations.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="./assets/images/adversity-media-logo.png" alt="Adversity Media" class="logo-img">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#services">Our Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clients.html">Clients</a>
+                    </li>
+                <li class="nav-item" role="none">
+                        <a class="nav-link" href="blog.html" role="menuitem">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                
+                
+                <div class="navbar-actions ms-3">
+                    <a href="index.html#contact" class="btn btn-primary-portfolio">Get Started</a>
+                </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Header -->
+    <section class="portfolio-header">
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+        
+        <div class="container">
+            <div class="text-center">
+                <span class="section-badge">Our Work</span>
+                <h1 class="complete-portfolio" style="color: lavenderblush;">Complete Portfolio</h1>
+                <p class="hero-description">
+                    Explore our comprehensive collection of 100+ successful projects across digital marketing, 
+                    web development, mobile applications, and creative branding solutions.
+                </p>
+                <div class="breadcrumb-nav mt-4">
+                    <a href="index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Portfolio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Filters & Grid -->
+    <section class="portfolio-section">
+        <div class="container">
+           <!-- Filter Buttons -->
+<div class="portfolio-filters" data-aos="fade-up">
+    <!-- Main Filter Row -->
+    <div class="filter-row-main">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="branding" id="brandingBtn">Branding & Design</button>
+        <button class="filter-btn" data-filter="digital-marketing">Digital Marketing</button>
+        <button class="filter-btn" data-filter="social-media">Social Media</button>
+        <button class="filter-btn" data-filter="websites">Website Development</button>
+        <button class="filter-btn" data-filter="mobile">Mobile Applications</button>
+    </div>
+    
+    <!-- Subcategory Filter Row (Hidden by default) -->
+    <div class="filter-row-sub" id="subcategoryFilters" style="display: none;">
+        <button class="filter-btn filter-btn-sub" data-filter="education">
+            <i class="fas fa-graduation-cap me-2"></i>Education
+        </button>
+        <button class="filter-btn filter-btn-sub" data-filter="healthcare">
+            <i class="fas fa-heartbeat me-2"></i>Healthcare
+        </button>
+        <button class="filter-btn filter-btn-sub" data-filter="real-estate">
+            <i class="fas fa-building me-2"></i>Real Estate
+        </button>
+        <button class="filter-btn filter-btn-sub" data-filter="spa-wellness">
+            <i class="fas fa-spa me-2"></i>Spa & Wellness
+        </button>
+        <button class="filter-btn filter-btn-sub" data-filter="food-beverage">
+            <i class="fas fa-utensils me-2"></i>Food & Beverage
+        </button>
+    </div>
+</div>
+
+            
+            <!-- Portfolio Stats -->
+            <div class="portfolio-stats mb-5" data-aos="fade-up" data-aos-delay="200">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="stat-badge">
+                            <h3>106</h3>
+                            <p>Total Projects</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="stat-badge">
+                            <h3>39</h3>
+                            <p>Social Media</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="stat-badge">
+                            <h3>36</h3>
+                            <p>Digital Marketing</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="stat-badge">
+                            <h3>31</h3>
+                            <p>Branding Projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- Toggle Switch Bar: Images / Videos -->
+<div class="portfolio-view-toggle text-center mb-3" data-aos="fade-up">
+    <div class="toggle-container">
+        <button class="toggle-btn active" id="imagesToggle" data-view="images">
+            <i class="fas fa-images me-2"></i>
+            Images
+        </button>
+        <button class="toggle-btn" id="videosToggle" data-view="videos">
+            <i class="fas fa-video me-2"></i>
+            Videos
+        </button>
+    </div>
+</div>
+
+<!-- Video Portfolio Section (Hidden by default) -->
+<div class="video-portfolio-section" id="videoSection" style="display: none;">
+    <div class="section-title text-center mb-5" data-aos="fade-up">
+        <h2 class="display-5 fw-bold" style="color:#2B4C8F;">
+            <i class="fas fa-video me-3"></i>Video Portfolio
+        </h2>
+        <p class="lead text-muted">Watch our creative video productions</p>
+    </div>
+
+    <div class="row g-4" id="videoContainer">
+        <!-- Videos will be dynamically loaded here by JavaScript -->
+    </div>
+</div>
+
+<!-- Portfolio Grid -->
+<div class="portfolio-grid" id="portfolioGrid">
+    <div class="row g-4" id="portfolioContainer">
+        <!-- Portfolio items will be dynamically loaded here by portfolio.js -->
+    </div>
+</div>
+
+            <!-- Load More Button -->
+            <div class="load-more-container text-center mt-5" id="loadMoreContainer">
+                <button class="btn btn-portfolio" id="loadMoreBtn">
+                    Load More Projects
+                    <i class="fas fa-arrow-down ms-2"></i>
+                </button>
+                <p class="mt-3 text-muted">Showing <span id="currentCount">12</span> of <span id="totalCount">106</span> projects</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Modal -->
+    <div class="modal fade" id="portfolioModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: lavenderblush;">Project Details</h5>
+                    <button type="button" class="btn-close"  data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Project Image" class="img-fluid mb-3">
+                    <h4 id="modalTitle">Project Title</h4>
+                    <p id="modalDescription">Project description goes here...</p>
+                    <div id="modalTechnologies" class="mb-3">
+                        <!-- Technologies will be populated here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" id="modalLiveLink" ></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Footer - EXACT SAME AS CLIENTS.HTML -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <img src="./assets/images/adversity-media-logo-white.png" alt="Adversity Media Logo" class="footer-logo mb-3">
+                        <p class="footer-description">
+                            Your trusted partner helps you thrive with innovative digital soloutions.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://facebook.com/adversitymedia" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="portfolio.html">Portfolio</a></li>
+                            <li><a href="clients.html">Clients</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Services</h4>
+                        <ul>
+                            <li><a href="index.html#services">Digital Marketing</a></li>
+                            <li><a href="index.html#services">SEO Services</a></li>
+                            <li><a href="index.html#services">Social Media Marketing</a></li>
+                            <li><a href="index.html#services">Web Development</a></li>
+                            <li><a href="index.html#services">Branding</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Info</h4>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hyderabad,India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 7330924511</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>adversitymedia.in@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <hr class="footer-divider"> -->
+            
+            <div class="footer-bottom text-center">
+                <p>&copy; 2024 Adversity Media. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://api.whatsapp.com/send?phone=7330924511&text=Hi" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Portfolio JavaScript - Contains all 106 portfolio items -->
+    <script src="js/portfolio.js"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>
