@@ -28,12 +28,37 @@ export const metadata: Metadata = {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AOSInit from "../components/AOSInit";
+import prisma from "@/lib/db";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await prisma.websiteData.findMany();
+  const siteData = data.reduce((acc, curr) => {
+    acc[curr.key] = curr.value;
+    return acc;
+  }, {} as Record<string, string>);
+
+  const contactNumber = siteData.contactNumber || "+91 7330924511";
+  const email = siteData.email || "adversitymedia.in@gmail.com";
+  const location = siteData.location || "Hyderabad, India";
+  const socialLinksStr = siteData.socialLinks || JSON.stringify({
+    facebook: "https://facebook.com/adversitymedia",
+    instagram: "https://instagram.com/adversitymedia",
+    linkedin: "https://linkedin.com/company/adversitymedia",
+    twitter: "https://twitter.com/adversitymedia",
+  });
+  let socialLinks = { facebook: "", instagram: "", linkedin: "", twitter: "" };
+  try {
+    socialLinks = JSON.parse(socialLinksStr);
+  } catch (e) {
+    console.error("Failed to parse socialLinks", e);
+  }
+  const headerLogo = siteData.headerLogo || "/assets/images/adversity-media-logo.png";
+  const footerLogo = siteData.footerLogo || "/assets/images/adversity-media-logo-white.png";
+
   return (
     <html lang="en">
       <head>
@@ -42,10 +67,10 @@ export default function RootLayout({
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
       </head>
       <body className={`${inter.variable} ${poppins.variable}`}>
-        <Header />
+        <Header contactNumber={contactNumber} email={email} socialLinks={socialLinks} logoUrl={headerLogo} />
         <AOSInit />
         {children}
-        <Footer />
+        <Footer contactNumber={contactNumber} email={email} location={location} socialLinks={socialLinks} logoUrl={footerLogo} />
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" strategy="lazyOnload" />
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="beforeInteractive" />
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" strategy="beforeInteractive" />

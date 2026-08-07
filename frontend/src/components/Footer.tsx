@@ -1,7 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function Footer() {
+interface FooterProps {
+  contactNumber: string;
+  email: string;
+  location: string;
+  socialLinks: {
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+    twitter?: string;
+  };
+  logoUrl?: string;
+}
+
+export default function Footer({ contactNumber, email, location, socialLinks, logoUrl }: FooterProps) {
   return (
     <>
       <footer className="footer bg-dark" role="contentinfo" aria-labelledby="footer-title">
@@ -10,24 +23,34 @@ export default function Footer() {
               <div className="row">
                   <div className="col-lg-4 col-md-6 mb-4">
                       <div className="footer-about">
-                          <img src="/assets/images/adversity-media-logo-white.png" alt="Adversity Media Logo" className="footer-logo mb-3" loading="lazy" style={{ height: '50px', width: 'auto' }} />
+                        <Link href="/" aria-label="Adversity Media Home">
+                          <img src={logoUrl || "/assets/images/adversity-media-logo-white.png"} alt="Adversity Media Logo" className="footer-logo mb-3" loading="lazy" style={{ height: '50px', width: 'auto' }} />
+                        </Link>
                           <p className="footer-description">
                               Adversity Media is the complete digital marketing company with solutions for 
                               any challenges in the digital field. Your dream designs come to life.
                           </p>
                           <div className="footer-social">
-                              <a href="https://facebook.com/adversitymedia" className="social-link me-2" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
-                                  <i className="fab fa-facebook-f" aria-hidden="true"></i>
-                              </a>
-                              <a href="#" className="social-link me-2" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
-                                  <i className="fab fa-instagram" aria-hidden="true"></i>
-                              </a>
-                              <a href="#" className="social-link me-2" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
-                                  <i className="fab fa-linkedin-in" aria-hidden="true"></i>
-                              </a>
-                              <a href="#" className="social-link me-2" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
-                                  <i className="fab fa-twitter" aria-hidden="true"></i>
-                              </a>
+                              {socialLinks.facebook && (
+                                <a href={socialLinks.facebook} className="social-link me-2" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-facebook-f" aria-hidden="true"></i>
+                                </a>
+                              )}
+                              {socialLinks.instagram && (
+                                <a href={socialLinks.instagram} className="social-link me-2" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                              )}
+                              {socialLinks.linkedin && (
+                                <a href={socialLinks.linkedin} className="social-link me-2" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-linkedin-in" aria-hidden="true"></i>
+                                </a>
+                              )}
+                              {socialLinks.twitter && (
+                                <a href={socialLinks.twitter} className="social-link me-2" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                                    <i className="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                              )}
                           </div>
                       </div>
                   </div>
@@ -63,15 +86,15 @@ export default function Footer() {
                           <h4 className="footer-title">Contact Us</h4>
                           <div className="contact-item mb-2">
                               <i className="fas fa-map-marker-alt me-2" aria-hidden="true"></i>
-                              <span>Hyderabad, India</span>
+                              <span>{location}</span>
                           </div>
                           <div className="contact-item mb-2">
                               <i className="fas fa-phone me-2" aria-hidden="true"></i>
-                              <a href="tel:+917330924511">+91 7330924511</a>
+                              <a href={`tel:${contactNumber}`}>{contactNumber}</a>
                           </div>
                           <div className="contact-item">
                               <i className="fas fa-envelope me-2" aria-hidden="true"></i>
-                              <a href="mailto:adversitymedia.in@gmail.com">adversitymedia.in@gmail.com</a>
+                              <a href={`mailto:${email}`}>{email}</a>
                           </div>
                       </div>
                   </div>

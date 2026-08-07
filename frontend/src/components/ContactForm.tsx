@@ -2,17 +2,26 @@
 
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import emailjs from '@emailjs/browser';
 import '@/styles/service-modal.css';
 
-export default function ContactForm() {
+interface ContactFormProps {
+    services?: Array<{ id: string; label: string; icon: string }>;
+}
+
+export default function ContactForm({ services = [] }: ContactFormProps) {
     const [selectedService, setSelectedService] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+    const [validated, setValidated] = useState(false);
 
     // Ensure portal only renders client-side
     useEffect(() => { setMounted(true); }, []);
 
-    const services = [
+    // Fallback if none provided
+    const displayServices = services.length > 0 ? services : [
         { id: 'seo',               label: 'SEO Services',       icon: 'fa-search' },
         { id: 'web-design',        label: 'Web Development',    icon: 'fa-laptop-code' },
         { id: 'digital-marketing', label: 'Digital Marketing',  icon: 'fa-bullhorn' },
@@ -22,7 +31,7 @@ export default function ContactForm() {
     ];
 
     const getLabel = () => {
-        const s = services.find(s => s.id === selectedService);
+        const s = displayServices.find(s => s.id === selectedService);
         return s ? s.label : 'Select Service';
     };
 
@@ -35,11 +44,65 @@ export default function ContactForm() {
         return () => window.removeEventListener('keydown', onKey);
     }, [isModalOpen]);
 
-    // Prevent body scroll when modal open
+    // Prevent body scroll when modal open and fix layout shift
     useEffect(() => {
-        document.body.style.overflow = isModalOpen ? 'hidden' : '';
-        return () => { document.body.style.overflow = ''; };
+        if (isModalOpen) {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            document.body.style.overflow = 'hidden';
+            if (scrollbarWidth > 0) {
+                document.body.style.paddingRight = `${scrollbarWidth}px`;
+            }
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        }
+        return () => { 
+            document.body.style.overflow = ''; 
+            document.body.style.paddingRight = '';
+        };
     }, [isModalOpen]);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        
+        if (!form.checkValidity() || !selectedService) {
+            e.stopPropagation();
+            setValidated(true);
+            return;
+        }
+
+        setValidated(true);
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        // Send via EmailJS
+        try {
+            const templateParams = {
+                from_name: `${form.firstName.value} ${form.lastName.value}`,
+                from_email: form.email.value,
+                phone: form.phone.value || 'Not provided',
+                service: selectedService,
+                message: form.message.value,
+            };
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
+
+            setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully. We will contact you within 24 hours.' });
+            form.reset();
+            setValidated(false);
+            setSelectedService('');
+        } catch (error) {
+            setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again later.' });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const modal = (
         <div
@@ -52,18 +115,10 @@ export default function ContactForm() {
             <div className="service-modal">
                 <div className="service-modal-header">
                     <h3 id="modal-title">What do you need help with?</h3>
-                    <button
-                        type="button"
-                        className="close-modal-btn"
-                        onClick={() => setIsModalOpen(false)}
-                        aria-label="Close"
-                    >
-                        <i className="fas fa-times" aria-hidden="true"></i>
-                    </button>
                 </div>
 
                 <ul className="service-options-list">
-                    {services.map((service) => (
+                    {displayServices.map((service) => (
                         <li key={service.id}>
                             <label className={`service-option-row ${selectedService === service.id ? 'active' : ''}`}>
                                 <input
@@ -89,12 +144,28 @@ export default function ContactForm() {
                     ))}
                 </ul>
             </div>
+            
+            {/* External close button */}
+            <button
+                type="button"
+                className="close-modal-btn-outside"
+                onClick={() => setIsModalOpen(false)}
+                aria-label="Close modal"
+            >
+                <i className="fas fa-times" aria-hidden="true"></i>
+            </button>
         </div>
     );
 
     return (
         <>
-            <form className="contact-form glass-morphism" id="contactForm" aria-labelledby="form-title" noValidate>
+            <form 
+                className={`contact-form glass-morphism ${validated ? 'was-validated' : ''}`} 
+                id="contactForm" 
+                aria-labelledby="form-title" 
+                noValidate
+                onSubmit={handleSubmit}
+            >
                 <h3 id="form-title" className="form-title">Send Us a Message</h3>
 
                 <div className="row">
@@ -131,7 +202,7 @@ export default function ContactForm() {
                     <input type="hidden" id="service" name="service" value={selectedService} required />
                     <button
                         type="button"
-                        className={`service-selector-btn${selectedService ? ' selected' : ''}`}
+                        className={`service-selector-btn ${validated && !selectedService ? 'is-invalid' : ''} ${selectedService ? 'selected' : ''}`}
                         onClick={() => setIsModalOpen(true)}
                         aria-haspopup="dialog"
                         aria-expanded={isModalOpen}
@@ -139,8 +210,18 @@ export default function ContactForm() {
                         <span>{getLabel()}</span>
                         <i className="fas fa-chevron-down" aria-hidden="true"></i>
                     </button>
-                    <div className="invalid-feedback">Please select a service.</div>
+                    {validated && !selectedService && (
+                        <div className="invalid-feedback d-block">Please select a service.</div>
+                    )}
                 </div>
+
+                {selectedService === 'other' && (
+                    <div className="form-group custom-service-input">
+                        <label htmlFor="customService" className="visually-hidden">Custom Service</label>
+                        <input type="text" id="customService" name="customService" placeholder="Please specify your desired service" required aria-required="true" />
+                        <div className="invalid-feedback">Please specify the service you need.</div>
+                    </div>
+                )}
 
                 <div className="form-group">
                     <label htmlFor="message" className="visually-hidden">Project Message</label>
@@ -148,15 +229,25 @@ export default function ContactForm() {
                     <div className="invalid-feedback">Please tell us about your project.</div>
                 </div>
 
-                <button type="submit" className="btn btn-primary-send btn-full" aria-describedby="submit-status">
-                    <span className="button-text">Send Message</span>
-                    <span className="button-loading d-none">
-                        <i className="fas fa-spinner fa-spin me-2" aria-hidden="true"></i>
-                        Sending...
-                    </span>
-                    <i className="fas fa-paper-plane ms-2" aria-hidden="true"></i>
+                <button type="submit" className="btn btn-primary-send btn-full" disabled={isSubmitting} aria-describedby="submit-status">
+                    {isSubmitting ? (
+                        <>
+                            <i className="fas fa-spinner fa-spin me-2" aria-hidden="true"></i>
+                            Sending...
+                        </>
+                    ) : (
+                        <>
+                            <span className="button-text">Send Message</span>
+                            <i className="fas fa-paper-plane ms-2" aria-hidden="true"></i>
+                        </>
+                    )}
                 </button>
-                <div id="submit-status" className="form-status mt-3" role="status" aria-live="polite"></div>
+                
+                {submitStatus && (
+                    <div id="submit-status" className={`alert alert-${submitStatus.type === 'success' ? 'success' : 'danger'} mt-3 mb-0`} role="alert" aria-live="polite">
+                        {submitStatus.message}
+                    </div>
+                )}
             </form>
 
             {/* Portal renders modal at document.body — unaffected by parent transforms */}

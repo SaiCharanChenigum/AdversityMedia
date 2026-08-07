@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ContactForm from '../components/ContactForm';
+import HomePortfolioSection from '../components/HomePortfolioSection';
 import prisma from '@/lib/db';
 
 export default async function Page() {
@@ -8,6 +9,32 @@ export default async function Page() {
   const heroVideoUrl = settings?.heroVideoUrl || "https://res.cloudinary.com/deftcnxf/video/upload/v1785946599/Adversity_media_hero_video_gulfsh.mp4";
   const aboutImageUrl = settings?.aboutImageUrl || "/assets/images/about-team.jpg";
   const ceoImageUrl = settings?.ceoImageUrl || "/assets/images/founder-ceo.jpg";
+  const websiteDataRows = await prisma.websiteData.findMany();
+  const siteData = websiteDataRows.reduce((acc, curr) => {
+    acc[curr.key] = curr.value;
+    return acc;
+  }, {} as Record<string, string>);
+
+  const homePortfolios = await prisma.homePortfolio.findMany({
+    include: { portfolio: true },
+    orderBy: { order: 'asc' }
+  });
+
+  const yearsOfExcellence = siteData.yearsOfExcellence || "5";
+  const projectsCompleted = siteData.projectsCompleted || "100";
+  const inHandProjects = siteData.inHandProjects || "10";
+  const happyClients = siteData.happyClients || "20";
+  const awardsWon = siteData.awardsWon || "10";
+  const contactNumber = siteData.contactNumber || "+91 7330924511";
+  const email = siteData.email || "adversitymedia.in@gmail.com";
+  const location = siteData.location || "Hyderabad, India";
+  
+  let services = [];
+  try {
+    services = siteData.services ? JSON.parse(siteData.services) : [];
+  } catch (e) {
+    console.error("Failed to parse services data", e);
+  }
   
   return (
     <main id="main-content">
@@ -41,7 +68,7 @@ export default async function Page() {
                         <div className="hero-content">
                             <div className="hero-badge animate__animated animate__fadeInUp">
                                 <i className="fas fa-award me-2" aria-hidden="true"></i>
-                                5+ Years of Excellence
+                                {yearsOfExcellence}+ Years of Excellence
                             </div>
                             
                             <div className="hero-text-wrapper">
@@ -102,7 +129,7 @@ export default async function Page() {
                         <div className="about-image-wrapper">
                             <img src={aboutImageUrl} alt="Adversity Media team working on digital marketing strategies" className="img-fluid about-main-img" loading="lazy" width="500" height="400" style={{ objectFit: 'cover' }} />
                             <div className="experience-badge glass-morphism">
-                                <h2 className="experience-number">5+ <span>Years</span></h2>
+                                <h2 className="experience-number">{yearsOfExcellence}+ <span>Years</span></h2>
                                 <p>Of Experience in Software & Digital Marketing Agency</p>
                             </div>
                         </div>
@@ -175,7 +202,7 @@ export default async function Page() {
                                 <img src="/assets/icons/projects.png" alt="Projects completed icon" loading="lazy" width="50" height="40" />
                             </div>
                             <div className="stat-content">
-                                <h3 className="stat-number" data-target="450" aria-label="450 projects completed">100+</h3>
+                                <h3 className="stat-number" data-target={projectsCompleted.replace(/\D/g,'')} aria-label={`${projectsCompleted} projects completed`}>{projectsCompleted}+</h3>
                                 <p className="stat-label">Projects Completed</p>
                             </div>
                         </div>
@@ -187,7 +214,7 @@ export default async function Page() {
                                 <img src="/assets/icons/ongoing.png" alt="Ongoing projects icon" loading="lazy" width="50" height="40" />
                             </div>
                             <div className="stat-content">
-                                <h3 className="stat-number" data-target="85" aria-label="85 projects in hand">10+</h3>
+                                <h3 className="stat-number" data-target={inHandProjects.replace(/\D/g,'')} aria-label={`${inHandProjects} projects in hand`}>{inHandProjects}+</h3>
                                 <p className="stat-label">In Hand<br />Projects</p>
                             </div>
                         </div>
@@ -199,7 +226,7 @@ export default async function Page() {
                                 <img src="/assets/icons/clients.png" alt="Happy clients icon" loading="lazy" width="50" height="40" />
                             </div>
                             <div className="stat-content">
-                                <h3 className="stat-number" data-target="300" aria-label="300 happy clients">20+</h3>
+                                <h3 className="stat-number" data-target={happyClients.replace(/\D/g,'')} aria-label={`${happyClients} happy clients`}>{happyClients}+</h3>
                                 <p className="stat-label">Happy<br />Clients</p>
                             </div>
                         </div>
@@ -211,7 +238,7 @@ export default async function Page() {
                                 <img src="/assets/icons/awards.png" alt="Awards won icon" loading="lazy" width="50" height="40" />
                             </div>
                             <div className="stat-content">
-                                <h3 className="stat-number" data-target="25" aria-label="25 awards won">10+</h3>
+                                <h3 className="stat-number" data-target={awardsWon.replace(/\D/g,'')} aria-label={`${awardsWon} awards won`}>{awardsWon}+</h3>
                                 <p className="stat-label">Awards Won</p>
                             </div>
                         </div>
@@ -379,131 +406,7 @@ export default async function Page() {
         </section>
 
         {/*  Portfolio Section  */}
-        <section className="portfolio-section" id="portfolio" aria-labelledby="portfolio-title">
-            <div className="container">
-                <div className="section-header text-center">
-                    <span className="section-badge">Our Work</span>
-                    <h2 id="portfolio-title" className="section-title">
-                        Our <span className="gradient-text">Portfolio</span>
-                    </h2>
-                </div>
-                
-                <div className="row g-4">
-                    {/*  Portfolio Items  */}
-                    <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <article className="portfolio-item">
-                            <div className="portfolio-image">
-                                <img src="/assets/images/portfolio/18a5aa58-206d-4c5c-bfd7-1ed6d770c7ed.jpg" alt="Brand identity design project showcasing complete branding solution" className="img-fluid" loading="lazy" width="400" height="300" />
-                                <div className="portfolio-overlay">
-                                    <div className="portfolio-content">
-                                        <h4>Brand Identity</h4>
-                                        <p>Complete branding solution</p>
-                                        <a href="/portfolio" aria-label="View brand identity design project details">
-                                            <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <article className="portfolio-item">
-                            <div className="portfolio-image">
-                                <img src="/assets/images/portfolio/72ff2fa8-f4a0-4a4c-ab4b-31f5b749310c.jpg" alt="E-commerce website project showing modern online store design" className="img-fluid" loading="lazy" width="400" height="300" />
-                                <div className="portfolio-overlay">
-                                    <div className="portfolio-content">
-                                        <h4>E-Commerce Platform</h4>
-                                        <p>Modern online store design</p>
-                                        <a href="/portfolio" aria-label="View e-commerce website project details">
-                                            <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <article className="portfolio-item">
-                            <div className="portfolio-image">
-                                <img src="/assets/images/portfolio/af63635a-3dd6-4268-b568-cb4db3eabc6d.jpg" alt="Mobile application project showcasing cross-platform app development" className="img-fluid" loading="lazy" width="400" height="300" />
-                                <div className="portfolio-overlay" >
-                                    <div className="portfolio-content" >
-                                        <h4>Mobile Application</h4>
-                                        <p>Cross-platform app development</p>
-                                        <a href="/portfolio" aria-label="View mobile application project details">
-                                            <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    {/*  Additional portfolio items  */}
-                    <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <article className="portfolio-item">
-                            <div className="portfolio-image">
-                                <img src="/assets/images/portfolio/7ac44cf2-65f0-4493-a789-3c935b8014b3.jpg" alt="Web design project showcase" className="img-fluid" loading="lazy" width="400" height="300" />
-                                <div className="portfolio-overlay">
-                                    <div className="portfolio-content">
-                                        <h4>Web Design</h4>
-                                        <p>Responsive corporate website</p>
-                                        <a href="/portfolio" aria-label="View web design project showcase">
-                                            <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <article className="portfolio-item">
-                            <div className="portfolio-image">
-                                <img src="/assets/images/portfolio/3d9c8177-effb-4753-8479-dd82dd899b61.jpg" alt="Digital marketing campaign results" className="img-fluid" loading="lazy" width="400" height="300" />
-                                <div className="portfolio-overlay">
-                                    <div className="portfolio-content">
-                                        <h4>Digital Campaign</h4>
-                                        <p>Social media marketing strategy</p>
-                                        <a href="/portfolio" aria-label="View digital marketing campaign results">
-                                            <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <article className="portfolio-item">
-                            <div className="portfolio-image">
-                                <img src="/assets/images/portfolio/28af1970-3ec4-4b62-82b6-28b7d6a6a36f.jpg" alt="UI/UX design project example" className="img-fluid" loading="lazy" width="400" height="300" />
-                                <div className="portfolio-overlay">
-                                    <div className="portfolio-content">
-                                        <h4>UI/UX Design</h4>
-                                        <p>Intuitive user interface creation</p>
-                                        <a href="/portfolio" aria-label="View UI/UX design project example">
-                                            <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div className="text-center mt-5">
-    <a href="/portfolio" className="btn btn-primary-solid" aria-label="View our complete portfolio">
-        See More Portfolio
-        <i className="fas fa-arrow-right ms-2" aria-hidden="true"></i>
-    </a>
-</div>
-
-                
-        
-            </div>
-        </section>
+        <HomePortfolioSection homePortfolios={homePortfolios} />
 
         {/*  Contact Section  */}
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
@@ -527,7 +430,7 @@ export default async function Page() {
                                     </div>
                                     <div className="contact-details">
                                         <h4>Call Us</h4>
-                                        <p><a href="tel:+917330924511">+91 7330924511</a></p>
+                                        <p><a href={`tel:${contactNumber}`}>{contactNumber}</a></p>
                                     </div>
                                 </div>
                                 
@@ -537,7 +440,7 @@ export default async function Page() {
                                     </div>
                                     <div className="contact-details">
                                         <h4>Email Us</h4>
-                                        <p><a href="mailto:adversitymedia.in@gmail.com">adversitymedia.in@gmail.com</a></p>
+                                        <p><a href={`mailto:${email}`}>{email}</a></p>
                                     </div>
                                 </div>
                                 
@@ -547,7 +450,7 @@ export default async function Page() {
                                     </div>
                                     <div className="contact-details">
                                         <h4>Visit Us</h4>
-                                        <p>Hyderabad, India</p>
+                                        <p>{location}</p>
                                     </div>
                                 </div>
                             </div>
@@ -555,7 +458,7 @@ export default async function Page() {
                     </div>
                     
                     <div className="col-lg-6" data-aos="fade-left">
-                        <ContactForm />
+                        <ContactForm services={services} />
                     </div>
                 </div>
             </div>

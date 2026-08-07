@@ -19,6 +19,7 @@ model Portfolio {
   technologies String[]
   liveUrl      String?
   createdAt    DateTime @default(now())
+  homePortfolio HomePortfolio?
 }
 
 model Client {
@@ -77,4 +78,17 @@ model Testimonial {
   imageUrl  String
   rating    Int      @default(5)
   createdAt DateTime @default(now())
+}
+
+model WebsiteData {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
+
+model HomePortfolio {
+  id          Int       @id @default(autoincrement())
+  portfolioId Int       @unique
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  order       Int       @default(0)
 }

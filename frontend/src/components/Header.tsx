@@ -2,7 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function Header() {
+interface HeaderProps {
+  contactNumber: string;
+  email: string;
+  socialLinks: {
+    facebook?: string;
+    instagram?: string;
+    linkedin?: string;
+    twitter?: string;
+  };
+  logoUrl?: string;
+}
+
+export default function Header({ contactNumber, email, socialLinks, logoUrl }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,28 +38,36 @@ export default function Header() {
                       <div className="top-info">
                           <span className="me-3">
                               <i className="fas fa-phone me-2" aria-hidden="true"></i>
-                              <a href="tel:+917330924511" aria-label="Call us at +91 7330924511">+91 7330924511</a>
+                              <a href={`tel:${contactNumber}`} aria-label={`Call us at ${contactNumber}`}>{contactNumber}</a>
                           </span>
                           <span className="me-3">
                               <i className="fas fa-envelope me-2" aria-hidden="true"></i>
-                              <a href="mailto:adversitymedia.in@gmail.com" aria-label="Email us at adversitymedia.in@gmail.com">adversitymedia.in@gmail.com</a>
+                              <a href={`mailto:${email}`} aria-label={`Email us at ${email}`}>{email}</a>
                           </span>
                       </div>
                   </div>
                   <div className="col-md-4">
                       <div className="top-social">
-                          <a href="https://facebook.com/adversitymedia" className="social-link me-2" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
-                              <i className="fab fa-facebook-f" aria-hidden="true"></i>
-                          </a>
-                          <a href="https://instagram.com/adversitymedia" className="social-link me-2" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
-                              <i className="fab fa-instagram" aria-hidden="true"></i>
-                          </a>
-                          <a href="https://linkedin.com/company/adversitymedia" className="social-link me-2" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
-                              <i className="fab fa-linkedin-in" aria-hidden="true"></i>
-                          </a>
-                          <a href="https://twitter.com/adversitymedia" className="social-link me-2" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
-                              <i className="fab fa-twitter" aria-hidden="true"></i>
-                          </a>
+                          {socialLinks.facebook && (
+                            <a href={socialLinks.facebook} className="social-link me-2" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-facebook-f" aria-hidden="true"></i>
+                            </a>
+                          )}
+                          {socialLinks.instagram && (
+                            <a href={socialLinks.instagram} className="social-link me-2" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                          )}
+                          {socialLinks.linkedin && (
+                            <a href={socialLinks.linkedin} className="social-link me-2" aria-label="Connect with us on LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-linkedin-in" aria-hidden="true"></i>
+                            </a>
+                          )}
+                          {socialLinks.twitter && (
+                            <a href={socialLinks.twitter} className="social-link me-2" aria-label="Follow us on Twitter" target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-twitter" aria-hidden="true"></i>
+                            </a>
+                          )}
                       </div>
                   </div>
               </div>
@@ -57,9 +77,9 @@ export default function Header() {
       {/* Navigation */}
       <nav className={`navbar navbar-expand-lg navbar-light fixed-top ${isScrolled ? 'scrolled' : ''}`} id="mainNavbar" role="navigation" aria-label="Main navigation">
           <div className="container">
-              <Link className="navbar-brand" href="/" aria-label="Adversity Media Homepage">
-                  <img src="/assets/images/adversity-media-logo.png" alt="Adversity Media Logo" className="logo-img" style={{ height: '50px', width: 'auto', transform: 'scale(1.8)', transformOrigin: 'left center' }} />
-              </Link>
+                <Link href="/" className="logo-container" aria-label="Adversity Media Home">
+                  <img src={logoUrl || "/assets/images/adversity-media-logo.png"} alt="Adversity Media Logo" className="logo-img" style={{ height: '50px', width: 'auto', transform: 'scale(1.8)', transformOrigin: 'left center' }} />
+                </Link>
               
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
