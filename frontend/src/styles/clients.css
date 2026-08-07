@@ -1,0 +1,1014 @@
+/* ================================
+   CLIENTS PAGE STYLES
+   ================================ */
+
+/* Clients Header */
+.clients-header {
+    min-height: 60vh;
+    background: var(--gradient-hero);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+}
+
+/* Client Stats */
+.client-stats {
+    background: var(--white);
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+}
+
+.clients-header .container .section-badge {
+    background: rgba(255, 255, 255, 0.267);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3)
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(43, 76, 143, 0.08);
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.stat-card .stat-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+}
+
+.stat-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-secondary);
+}
+
+.stat-card .stat-label {
+    color: var(--gray-600);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Industry Filter */
+.industry-filter {
+    background: var(--light-gray);
+    border-top: 1px solid rgba(43, 76, 143, 0.08);
+}
+
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-tab {
+    padding: 12px 24px;
+    border: 2px solid var(--gray-300);
+    background: var(--white);
+    color: var(--gray-600);
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-family: var(--font-secondary);
+    transition: var(--transition);
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.filter-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.filter-tab:hover::before,
+.filter-tab.active::before {
+    left: 0;
+}
+
+.filter-tab:hover,
+.filter-tab.active {
+transform: translate3d(1px) scale(1.02px);
+    color: var(--gradient-primary);
+     box-shadow: 
+        /* 0 4px 15px rgba(43, 76, 143, 0.4), */
+        0 0 0 3px var(--white),          
+        0 0 0 5px var(--primary-blue); 
+        /* text-shadow: 0 0 8px rgba(149, 192, 240, 0.8); */
+}
+
+/* Clients Section */
+.clients-section {
+    background: var(--white);
+}
+
+.client-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(43, 76, 143, 0.08);
+    position: relative;
+}
+
+.client-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Client Logo Container */
+.client-logo-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.client-logo {
+    max-width: 330px;
+    max-height: 330px;
+    object-fit: contain;
+    transition: var(--transition);
+    filter: grayscale(20%);
+}
+
+.client-logo-container:hover .client-logo {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+/* Client Overlay */
+.client-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(66, 66, 66, 0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+transition: var(--transition);
+}
+
+.client-logo-container:hover .client-overlay {
+    opacity: 1;
+}
+
+.client-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.client-action {
+    width: 50px;
+    height: 50px;
+    background: var(--white);
+    color: var(--gray-300);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+.client-action:hover {
+    /* Enhanced glassmorphism on hover */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    
+    /* Keep white color */
+    color: var(--white);
+    
+    /* Smooth hover animation */
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+/* Client Info */
+.client-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.client-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-secondary);
+    line-height: 1.3;
+}
+
+.client-category {
+    color: var(--gray-500);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.client-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.service-tag {
+    background: rgba(43, 76, 143, 0.1);
+    color: var(--primary-blue);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(43, 76, 143, 0.2);
+    transition: var(--transition-fast);
+}
+
+.service-tag:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Client Testimonials */
+.testimonial-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    height: 100%;
+    position: relative;
+    border: 1px solid rgba(43, 76, 143, 0.08);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-quote {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.testimonial-text {
+    color: var(--gray-600);
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid var(--primary-blue);
+}
+
+.author-info h5 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.author-info span {
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.testimonial-rating {
+    color: var(--accent-orange);
+    font-size: 0.9rem;
+}
+
+/* Client CTA */
+.client-cta {
+    background: var(--gradient-hero);
+    color: var(--white);
+    text-align: center;
+}
+
+.cta-title {
+    color: var(--accent-orange);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-description {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+btn-startproject{
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.267);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+    
+.btn-startproject:hover{
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+.btn-outline-portfolio {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.267);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.btn-outline-portfolio:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+clients-header .hero-title{
+    font-size: 4.2rem;
+}
+
+.clients-header .hero-title .our-color{
+    color: var(--accent-orange);
+}
+.clients-header .hero-title .valued-text{
+    color: white;
+}
+.clients-description{
+    color: white;
+
+}
+/* Client Modal Enhancements */
+.modal-content {
+    border-radius: var(--border-radius-lg);
+    border: none;
+    box-shadow: var(--shadow-xl);
+}
+
+.modal-header {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-services .service-tag {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+/* Print Styles */
+@media print {
+    .clients-header,
+    .industry-filter,
+    .client-cta,
+    .navbar,
+    .footer,
+    .whatsapp-float,
+    .back-to-top {
+        display: none !important;
+    }
+    
+    .client-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .client-logo-container {
+        height: auto;
+        padding: 10px;
+    }
+}
+
+
+
+/* Mobile Responsive - Exact Portfolio Pattern with Fixed Header */
+@media (max-width: 767.98px) {
+    /* Clients Header - Force Center Alignment */
+    .clients-header {
+        min-height: 50vh;
+        padding: 80px 0 40px;
+        text-align: center !important;
+    }
+    
+    .clients-header .container {
+        padding: 0 30px !important;
+        text-align: center !important;
+    }
+    
+    .clients-header .row {
+        margin: 0 !important;
+        text-align: center !important;
+    }
+    
+    .clients-header [class*="col-"] {
+        padding: 0 !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+    
+    .clients-header .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .clients-header .clients-description {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .clients-header .section-badge {
+        text-align: center !important;
+        margin: 0 auto 1.2rem auto !important;
+        padding: 6px 14px !important; /* Smaller on mobile */
+        font-size: 11px !important; /* Smaller font on mobile */
+    }
+    
+    /* Client Stats - 2x2 Grid Layout */
+    .client-stats {
+        margin-top: -30px;
+        padding: 40px 0;
+    }
+    
+    .client-stats .container {
+        padding: 0 30px;
+    }
+    
+    .client-stats .row {
+        margin: 0 -10px; /* Add consistent spacing */
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -0.1rem;
+    }
+    
+    .client-stats [class*="col-"] {
+        padding: 0 10px; /* Consistent with portfolio */
+        flex: 0 0 50% !important; /* 2 items per row */
+        max-width: 50% !important;
+        margin-bottom: 20px; /* Space between rows */
+    }
+    
+    .stat-card {
+        padding: 1.2rem; /* Reduced padding for smaller cards */
+        margin-bottom: 0; /* Remove card margin, use column margin instead */
+        max-width: 100%;
+        height: auto; /* Allow flexible height */
+        text-align: center;
+    }
+    
+    .stat-card .stat-icon {
+        width: 50px; /* Slightly smaller icon */
+        height: 50px;
+        font-size: 1.2rem;
+        margin: 0 auto 1rem;
+    }
+    
+    .stat-card .stat-number {
+        font-size: 1.8rem; /* Slightly smaller number */
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .stat-label {
+        font-size: 0.85rem; /* Smaller label text */
+    }
+    
+    /* Industry Filter */
+    .industry-filter {
+        padding: 20px 0;
+    }
+    
+    .industry-filter .container {
+        padding: 0 30px;
+    }
+    
+    .industry-filter .row {
+        margin: 0;
+    }
+    
+    .industry-filter [class*="col-"] {
+        padding: 0;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .filter-tabs {
+        justify-content: center;
+        gap: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .filter-tab {
+        padding: 10px 18px;
+        font-size: 13px;
+        flex: 1;
+        min-width: auto;
+        text-align: center;
+        max-width: 120px;
+    }
+    
+    /* Clients Section */
+    .clients-section {
+        padding: 40px 0;
+    }
+    
+    .clients-section .container {
+        padding: 0 30px;
+    }
+    
+    .clients-section .row {
+        margin: 0;
+    }
+    
+    .clients-section [class*="col-"] {
+        padding: 0;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .client-item {
+        margin-bottom: 25px;
+        max-width: 100%;
+    }
+    
+    .client-card {
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    .client-logo-container {
+        height: 150px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .client-info {
+        padding: 1.2rem;
+        text-align: center;
+    }
+    
+    .client-name {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    
+    /* Testimonials Section - ADDED */
+    .client-testimonials {
+        padding: 40px 0;
+    }
+    
+    .client-testimonials .container {
+        padding: 0 30px;
+    }
+    
+    .client-testimonials .row {
+        margin: 0;
+    }
+    
+    .client-testimonials [class*="col-"] {
+        padding: 0;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem;
+        margin-bottom: 25px;
+        border-radius: 15px;
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .testimonial-author {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .testimonial-rating {
+        text-align: center;
+    }
+    
+    /* Client CTA - UPDATED */
+    .client-cta {
+        padding: 40px 0;
+        text-align: center;
+    }
+    
+    .client-cta .container {
+        padding: 0 30px;
+    }
+    
+    .client-cta .row {
+        margin: 0;
+    }
+    
+    .client-cta [class*="col-"] {
+        padding: 0;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .cta-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    /* CRITICAL FIX - CTA Actions and Buttons */
+    .cta-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    .btn-startproject,
+    .btn-outline-portfolio {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 18px 30px !important;
+        font-size: 16px !important;
+        border-radius: 50px !important;
+        text-decoration: none !important;
+    }
+    
+    /* Client Modal Fixes for Mobile - Exact Portfolio Styling */
+    #clientModal .modal-dialog {
+        margin: 20px;
+        max-width: calc(100% - 40px);
+        height: auto;
+        max-height: calc(100vh - 40px);
+    }
+    
+    #clientModal .modal-content {
+        height: auto;
+        max-height: calc(100vh - 40px);
+        border-radius: 20px;
+    }
+    
+    /* Modal header */
+    #clientModal .modal-header {
+        padding: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    #clientModal .modal-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding-right: 30px;
+    }
+    
+    /* Close button */
+    #clientModal .btn-close {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        opacity: 0.7;
+    }
+    
+    /* Modal body */
+    #clientModal .modal-body {
+        padding: 20px;
+        overflow-y: auto;
+        max-height: calc(100vh - 200px);
+    }
+    
+    /* Modal image */
+    #clientModal .modal-body img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+    
+    /* Client title in body */
+    #clientModal .modal-body h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #2B4C8F;
+    }
+    
+    /* Description text */
+    #clientModal .modal-body p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    
+    /* Services section */
+    #modalServices {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    /* Service tags - Fixed alignment */
+    #modalServices .service-tag,
+    .service-tag {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(43, 76, 143, 0.1);
+        color: var(--primary-blue);
+        border: 1px solid rgba(43, 76, 143, 0.2);
+        color: rgb(146, 139, 158);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        white-space: nowrap;
+        text-align: center;
+        line-height: 1.2;
+    }
+    
+    /* Modal footer */
+    #clientModal .modal-footer {
+        padding: 15px 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        justify-content: center;
+    }
+    
+    #clientModal .modal-footer .btn {
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 500;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .clients-header .container,
+    .client-stats .container,
+    .industry-filter .container,
+    .clients-section .container,
+    .client-cta .container,
+    .client-testimonials .container {
+        padding: 0 25px;
+    }
+    
+    /* Force center on header for small screens */
+    .clients-header .container {
+        padding: 0 25px !important;
+        text-align: center !important;
+    }
+    
+    .clients-header .hero-title,
+    .clients-header .clients-description,
+    .clients-header .section-badge {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    /* Even smaller badge on very small screens */
+    .clients-header .section-badge {
+        padding: 5px 12px !important; /* Smallest padding */
+        font-size: 10px !important; /* Smallest font */
+        margin-bottom: 1rem !important; /* Minimal space */
+    }
+    
+    /* Stats Cards - More compact on very small screens */
+    .client-stats [class*="col-"] {
+        padding: 0 8px; /* Tighter spacing */
+        margin-bottom: 15px;
+    }
+    
+    .stat-card {
+        padding: 1rem; /* More compact padding */
+    }
+    
+    .stat-card .stat-icon {
+        width: 45px; /* Even smaller icon */
+        height: 45px;
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .stat-card .stat-number {
+        font-size: 1.6rem; /* Smaller number for small screens */
+    }
+    
+    .stat-card .stat-label {
+        font-size: 0.8rem; /* Smaller label */
+    }
+    
+    .client-item,
+    .testimonial-card {
+        margin-bottom: 20px;
+    }
+    
+    .filter-tabs {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .filter-tab {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    .client-actions {
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .client-action {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.2rem;
+    }
+    
+    .client-info {
+        padding: 1rem;
+    }
+    
+    .client-name {
+        font-size: 1rem;
+    }
+    
+    /* CTA Buttons - Smaller on very small screens */
+    .btn-startproject,
+    .btn-outline-portfolio {
+        max-width: 250px !important;
+        padding: 16px 25px !important;
+        font-size: 15px !important;
+    }
+    
+    /* Client Modal - Very Small Screens */
+    #clientModal .modal-dialog {
+        margin: 15px;
+        max-width: calc(100% - 30px);
+    }
+    
+    #clientModal .modal-title {
+        font-size: 1.25rem;
+    }
+    
+    #clientModal .modal-body {
+        padding: 15px;
+    }
+    
+    #clientModal .modal-body h3 {
+        font-size: 1.15rem;
+    }
+    
+    #clientModal .modal-body p {
+        font-size: 0.9rem;
+    }
+    
+    .service-tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Tablets - 2 columns */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .clients-section [class*="col-md-6"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .client-stats [class*="col-md-6"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Desktop - 3 columns */
+@media (min-width: 992px) {
+    .clients-section [class*="col-lg-4"] {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    
+    .client-stats [class*="col-lg-3"] {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}

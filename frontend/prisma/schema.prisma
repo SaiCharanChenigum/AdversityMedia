@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Portfolio {
+  id           Int      @id @default(autoincrement())
+  title        String
+  category     String
+  subcategory  String?
+  image        String
+  description  String?
+  technologies String[]
+  liveUrl      String?
+  createdAt    DateTime @default(now())
+}
+
+model Client {
+  id          Int      @id @default(autoincrement())
+  name        String
+  category    String?
+  industry    String?
+  logoUrl     String
+  description String?
+  services    String[]
+  websiteUrl  String?
+  createdAt   DateTime @default(now())
+}
+
+model Blog {
+  id            Int      @id @default(autoincrement())
+  title         String
+  content       String
+  imageUrl      String
+  hiddenContent String?
+  galleryImages String[]
+  author        String   @default("Adversity Media")
+  createdAt     DateTime @default(now())
+}
+
+model Example {
+  id        Int      @id @default(autoincrement())
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model SiteSettings {
+  id           Int      @id @default(autoincrement())
+  heroVideoUrl String?
+  aboutImageUrl String?
+  ceoImageUrl  String?
+  updatedAt    DateTime @updatedAt
+}
+
+model VideoPortfolio {
+  id           Int      @id @default(autoincrement())
+  title        String
+  category     String
+  videoUrl     String
+  thumbnailUrl String?
+  description  String?
+  technologies String[]
+  createdAt    DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  text      String
+  author    String
+  company   String?
+  imageUrl  String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now())
+}
