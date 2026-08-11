@@ -37,7 +37,7 @@ export default async function Page() {
   }
   
   return (
-    <main id="main-content">
+    <main id="main-content" style={{ overflowX: 'hidden', width: '100%' }}>
       {/* Content Migrated from HTML */}
       
         {/*  Hero Section  */}

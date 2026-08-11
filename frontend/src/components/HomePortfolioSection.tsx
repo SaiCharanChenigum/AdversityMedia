@@ -18,9 +18,9 @@ export default function HomePortfolioSection({ homePortfolios }: { homePortfolio
                     {/* Dynamic Portfolio Items */}
                     {homePortfolios.map((item: any, index: number) => (
                         <div key={item.id} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={`${(index % 3 + 1) * 100}`}>
-                            <article className="portfolio-item">
+                            <article className="portfolio-item cursor-pointer" onClick={() => setSelectedProject(item.portfolio)} style={{ cursor: 'pointer' }}>
                                 <div className="portfolio-image">
-                                    <img src={item.portfolio.image} alt={`${item.portfolio.title} project showcase`} className="img-fluid" loading="lazy" width="400" height="300" style={{ objectFit: 'cover', height: '300px', width: '100%' }} />
+                                    <img src={item.portfolio.image} alt={`${item.portfolio.title} project showcase`} className="img-fluid" loading="lazy" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
                                     <div className="portfolio-overlay">
                                         <div className="portfolio-content">
                                             <h4>{item.portfolio.title}</h4>

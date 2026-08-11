@@ -1353,3 +1353,21 @@ section {
         padding: 50px 0 !important;
     }
 }
+
+.logo-container {
+    display: flex !important;
+    align-items: center !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 250px;
+}
+
+.header-logo-img {
+    height: 70px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    transform: scale(1.6) translateY(8px) !important;
+    transform-origin: left center !important;
+}

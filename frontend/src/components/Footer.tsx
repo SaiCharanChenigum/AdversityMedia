@@ -55,7 +55,7 @@ export default function Footer({ contactNumber, email, location, socialLinks, lo
                       </div>
                   </div>
                   
-                  <div className="col-lg-2 col-md-6 mb-4">
+                  <div className="col-6 col-lg-2 col-md-6 mb-4">
                       <div className="footer-links">
                           <h4 className="footer-title">Quick Links</h4>
                           <ul>
@@ -68,7 +68,7 @@ export default function Footer({ contactNumber, email, location, socialLinks, lo
                       </div>
                   </div>
                   
-                  <div className="col-lg-3 col-md-6 mb-4">
+                  <div className="col-6 col-lg-3 col-md-6 mb-4">
                       <div className="footer-links">
                           <h4 className="footer-title">Our Services</h4>
                           <ul>
@@ -111,7 +111,7 @@ export default function Footer({ contactNumber, email, location, socialLinks, lo
       </footer>
 
       {/* WhatsApp Float Button */}
-      <a href="https://api.whatsapp.com/send?phone=917330924511&text=Hi%2C%20I%27m%20interested%20in%20your%20digital%20marketing%20services" 
+      <a href={`https://api.whatsapp.com/send?phone=${contactNumber.replace(/\\D/g, '')}&text=Hi%2C%20I%27m%20interested%20in%20your%20digital%20marketing%20services`}
          className="whatsapp-float" target="_blank" rel="noopener noreferrer" 
          aria-label="Contact us on WhatsApp for quick support">
           <i className="fab fa-whatsapp" aria-hidden="true"></i>

@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser';
 import '@/styles/service-modal.css';
 
 interface ContactFormProps {
-    services?: Array<{ id: string; label: string; icon: string }>;
+    services?: Array<{ id: string; title: string }>;
 }
 
 export default function ContactForm({ services = [] }: ContactFormProps) {
@@ -22,17 +22,17 @@ export default function ContactForm({ services = [] }: ContactFormProps) {
 
     // Fallback if none provided
     const displayServices = services.length > 0 ? services : [
-        { id: 'seo',               label: 'SEO Services',       icon: 'fa-search' },
-        { id: 'web-design',        label: 'Web Development',    icon: 'fa-laptop-code' },
-        { id: 'digital-marketing', label: 'Digital Marketing',  icon: 'fa-bullhorn' },
-        { id: 'branding',          label: 'Branding Services',  icon: 'fa-paint-brush' },
-        { id: 'mobile-apps',       label: 'Mobile Apps',        icon: 'fa-mobile-alt' },
-        { id: 'other',             label: 'Other',              icon: 'fa-ellipsis-h' },
+        { id: 'seo',               title: 'SEO Services' },
+        { id: 'web-design',        title: 'Web Development' },
+        { id: 'digital-marketing', title: 'Digital Marketing' },
+        { id: 'branding',          title: 'Branding Services' },
+        { id: 'mobile-apps',       title: 'Mobile Apps' },
+        { id: 'other',             title: 'Other' },
     ];
 
     const getLabel = () => {
         const s = displayServices.find(s => s.id === selectedService);
-        return s ? s.label : 'Select Service';
+        return s ? s.title : 'Select Service';
     };
 
     // Escape key closes modal
@@ -132,10 +132,7 @@ export default function ContactForm({ services = [] }: ContactFormProps) {
                                     }}
                                     className="visually-hidden"
                                 />
-                                <span className="service-row-icon">
-                                    <i className={`fas ${service.icon}`} aria-hidden="true"></i>
-                                </span>
-                                <span className="service-row-label">{service.label}</span>
+                                <span className="service-row-label">{service.title}</span>
                                 {selectedService === service.id && (
                                     <i className="fas fa-check service-row-check" aria-hidden="true"></i>
                                 )}

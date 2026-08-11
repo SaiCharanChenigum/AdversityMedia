@@ -77,8 +77,8 @@ export default function Header({ contactNumber, email, socialLinks, logoUrl }: H
       {/* Navigation */}
       <nav className={`navbar navbar-expand-lg navbar-light fixed-top ${isScrolled ? 'scrolled' : ''}`} id="mainNavbar" role="navigation" aria-label="Main navigation">
           <div className="container">
-                <Link href="/" className="logo-container" aria-label="Adversity Media Home">
-                  <img src={logoUrl || "/assets/images/adversity-media-logo.png"} alt="Adversity Media Logo" className="logo-img" style={{ height: '50px', width: 'auto', transform: 'scale(1.8)', transformOrigin: 'left center' }} />
+                <Link href="/" className="navbar-brand logo-container" aria-label="Adversity Media Home">
+                  <img src={logoUrl || "/assets/images/adversity-media-logo.png"} alt="Adversity Media Logo" className="logo-img header-logo-img" />
                 </Link>
               
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 

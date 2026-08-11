@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AOSInit from "../components/AOSInit";
+import ClientLayoutWrapper from "../components/ClientLayoutWrapper";
 import prisma from "@/lib/db";
 
 export default async function RootLayout({
@@ -67,10 +68,13 @@ export default async function RootLayout({
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
       </head>
       <body className={`${inter.variable} ${poppins.variable}`}>
-        <Header contactNumber={contactNumber} email={email} socialLinks={socialLinks} logoUrl={headerLogo} />
-        <AOSInit />
-        {children}
-        <Footer contactNumber={contactNumber} email={email} location={location} socialLinks={socialLinks} logoUrl={footerLogo} />
+        <ClientLayoutWrapper 
+          header={<Header contactNumber={contactNumber} email={email} socialLinks={socialLinks} logoUrl={headerLogo} />}
+          footer={<Footer contactNumber={contactNumber} email={email} location={location} socialLinks={socialLinks} logoUrl={footerLogo} />}
+        >
+          <AOSInit />
+          {children}
+        </ClientLayoutWrapper>
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" strategy="lazyOnload" />
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="beforeInteractive" />
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" strategy="beforeInteractive" />
