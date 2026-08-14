@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import prisma from './src/lib/db.ts';
+import prisma from './src/lib/db';
 
 async function main() {
   await prisma.websiteData.upsert({
