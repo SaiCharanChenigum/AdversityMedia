@@ -15,6 +15,30 @@ export default async function Page() {
     orderBy: { id: 'asc' }
   });
 
+  const statsData = await prisma.websiteData.findUnique({
+    where: { key: 'clients_stats' }
+  });
+  
+  const industriesData = await prisma.websiteData.findUnique({
+    where: { key: 'clients_industries' }
+  });
+
+  const stats = statsData ? JSON.parse(statsData.value) : {
+    happyClients: '50',
+    industriesServed: '15',
+    satisfaction: '98',
+    repeatClients: '85'
+  };
+
+  const industries = industriesData ? JSON.parse(industriesData.value) : [
+    { id: 'hospitality', label: 'Hospitality' },
+    { id: 'healthcare', label: 'Healthcare' },
+    { id: 'education', label: 'Education' },
+    { id: 'retail', label: 'Retail & E-commerce' },
+    { id: 'technology', label: 'Technology' },
+    { id: 'fashion', label: 'Fashion & Lifestyle' }
+  ];
+
   return (
     <>
       {/* Content Migrated from HTML */}
@@ -63,7 +87,7 @@ export default async function Page() {
                         <div className="stat-icon">
                             <i className="fas fa-users"></i>
                         </div>
-                        <div className="stat-number">50+</div>
+                        <div className="stat-number">{stats.happyClients}+</div>
                         <div className="stat-label">Happy Clients</div>
                     </div>
                 </div>
@@ -72,7 +96,7 @@ export default async function Page() {
                         <div className="stat-icon">
                             <i className="fas fa-industry"></i>
                         </div>
-                        <div className="stat-number">15+</div>
+                        <div className="stat-number">{stats.industriesServed}+</div>
                         <div className="stat-label">Industries Served</div>
                     </div>
                 </div>
@@ -81,7 +105,7 @@ export default async function Page() {
                         <div className="stat-icon">
                             <i className="fas fa-star"></i>
                         </div>
-                        <div className="stat-number">98%</div>
+                        <div className="stat-number">{stats.satisfaction}%</div>
                         <div className="stat-label">Client Satisfaction</div>
                     </div>
                 </div>
@@ -90,7 +114,7 @@ export default async function Page() {
                         <div className="stat-icon">
                             <i className="fas fa-redo-alt"></i>
                         </div>
-                        <div className="stat-number">85%</div>
+                        <div className="stat-number">{stats.repeatClients}%</div>
                         <div className="stat-label">Repeat Clients</div>
                     </div>
                 </div>
@@ -98,7 +122,7 @@ export default async function Page() {
         </div>
     </section>
 
-    <ClientsClient initialClients={clients} />
+    <ClientsClient initialClients={clients} industries={industries} />
     
     <TestimonialsClient testimonials={testimonials} />
 

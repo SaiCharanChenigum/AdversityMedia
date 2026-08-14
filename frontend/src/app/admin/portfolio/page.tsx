@@ -1,5 +1,10 @@
 import PortfolioAdminClient from './PortfolioAdminClient';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 export default function AdminPortfolioPage() {
-  return <PortfolioAdminClient />;
+  return (
+    <ProtectedRoute>
+      <PortfolioAdminClient />
+    </ProtectedRoute>
+  );
 }

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-export default function ClientsClient({ initialClients }: { initialClients: any[] }) {
+export default function ClientsClient({ initialClients, industries }: { initialClients: any[], industries: any[] }) {
     const [activeFilter, setActiveFilter] = useState('all');
     const [selectedClient, setSelectedClient] = useState<any>(null);
     const [isMounted, setIsMounted] = useState(false);
@@ -28,12 +28,15 @@ export default function ClientsClient({ initialClients }: { initialClients: any[
                         <div className="col-lg-10">
                             <div className="filter-tabs">
                                 <button className={`filter-tab ${activeFilter === 'all' ? 'active' : ''}`} onClick={() => setActiveFilter('all')}>All Industries</button>
-                                <button className={`filter-tab ${activeFilter === 'hospitality' ? 'active' : ''}`} onClick={() => setActiveFilter('hospitality')}>Hospitality</button>
-                                <button className={`filter-tab ${activeFilter === 'healthcare' ? 'active' : ''}`} onClick={() => setActiveFilter('healthcare')}>Healthcare</button>
-                                <button className={`filter-tab ${activeFilter === 'education' ? 'active' : ''}`} onClick={() => setActiveFilter('education')}>Education</button>
-                                <button className={`filter-tab ${activeFilter === 'retail' ? 'active' : ''}`} onClick={() => setActiveFilter('retail')}>Retail & E-commerce</button>
-                                <button className={`filter-tab ${activeFilter === 'technology' ? 'active' : ''}`} onClick={() => setActiveFilter('technology')}>Technology</button>
-                                <button className={`filter-tab ${activeFilter === 'fashion' ? 'active' : ''}`} onClick={() => setActiveFilter('fashion')}>Fashion & Lifestyle</button>
+                                {industries.map(ind => (
+                                    <button 
+                                        key={ind.id} 
+                                        className={`filter-tab ${activeFilter === ind.id ? 'active' : ''}`} 
+                                        onClick={() => setActiveFilter(ind.id)}
+                                    >
+                                        {ind.label}
+                                    </button>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -63,7 +66,9 @@ export default function ClientsClient({ initialClients }: { initialClients: any[
                                     </div>
                                     <div className="client-info">
                                         <h4 className="client-name">{client.name}</h4>
-                                        <p className="client-category">{client.category || client.industry}</p>
+                                        <p className="client-category">
+                                            {industries.find((i:any) => i.id === client.industry)?.label || client.category || client.industry}
+                                        </p>
                                         <div className="client-services">
                                             {client.services && client.services.map((service: string, sIndex: number) => (
                                                 <span key={sIndex} className="service-tag">{service}</span>
@@ -90,7 +95,9 @@ export default function ClientsClient({ initialClients }: { initialClients: any[
                             </div>
                             <div className="custom-modal-details">
                                 <h4>{selectedClient.name}</h4>
-                                <div className="portfolio-category">{selectedClient.category || selectedClient.industry}</div>
+                                <div className="portfolio-category">
+                                    {industries.find((i:any) => i.id === selectedClient.industry)?.label || selectedClient.category || selectedClient.industry}
+                                </div>
                                 {selectedClient.description && (
                                     <p>{selectedClient.description}</p>
                                 )}

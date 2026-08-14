@@ -1,5 +1,10 @@
 import HomeAdminClient from './HomeAdminClient';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 export default function AdminHomePage() {
-  return <HomeAdminClient />;
+  return (
+    <ProtectedRoute>
+      <HomeAdminClient />
+    </ProtectedRoute>
+  );
 }

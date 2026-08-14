@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import ContactForm from '../components/ContactForm';
-import HomePortfolioSection from '../components/HomePortfolioSection';
+import ContactForm from '@/components/ContactForm';
+import HomePortfolioSection from '@/components/HomePortfolioSection';
+import ClientMarquee from '@/components/ClientMarquee';
+import TestimonialMarquee from '@/components/TestimonialMarquee';
 import prisma from '@/lib/db';
 
 export default async function Page() {
@@ -15,9 +17,19 @@ export default async function Page() {
     return acc;
   }, {} as Record<string, string>);
 
-  const homePortfolios = await prisma.homePortfolio.findMany({
+  let homePortfolios = await prisma.homePortfolio.findMany({
     include: { portfolio: true },
     orderBy: { order: 'asc' }
+  });
+  const limit = siteData.home_portfolio_limit ? parseInt(siteData.home_portfolio_limit) : 6;
+  homePortfolios = homePortfolios.slice(0, limit);
+
+  const clients = await prisma.client.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+
+  const testimonials = await prisma.testimonial.findMany({
+    orderBy: { createdAt: 'desc' }
   });
 
   const yearsOfExcellence = siteData.yearsOfExcellence || "5";
@@ -407,6 +419,12 @@ export default async function Page() {
 
         {/*  Portfolio Section  */}
         <HomePortfolioSection homePortfolios={homePortfolios} />
+
+        {/* Client Marquee Section */}
+        <ClientMarquee clients={clients} />
+
+        {/* Testimonial Marquee Section */}
+        <TestimonialMarquee testimonials={testimonials} />
 
         {/*  Contact Section  */}
         <section className="contact-section" id="contact" aria-labelledby="contact-title">

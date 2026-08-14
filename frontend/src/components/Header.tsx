@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import LoadingLink from './LoadingLink';
 
 interface HeaderProps {
   contactNumber: string;
@@ -16,6 +17,14 @@ interface HeaderProps {
 
 export default function Header({ contactNumber, email, socialLinks, logoUrl }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const closeNavbar = () => {
+    const navbarToggler = document.querySelector('.navbar-toggler') as HTMLElement;
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (navbarCollapse && navbarCollapse.classList.contains('show') && navbarToggler) {
+      navbarToggler.click();
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,30 +98,30 @@ export default function Header({ contactNumber, email, socialLinks, logoUrl }: H
               <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav ms-auto" role="menubar">
                       <li className="nav-item" role="none">
-                          <Link className="nav-link active" href="/" role="menuitem" aria-current="page">Home</Link>
+                          <LoadingLink className="nav-link active" href="/" role="menuitem" aria-current="page" onClick={closeNavbar}>Home</LoadingLink>
                       </li>
                       <li className="nav-item" role="none">
-                          <Link className="nav-link" href="/#about" role="menuitem">About Us</Link>
+                          <LoadingLink className="nav-link" href="/#about" role="menuitem" onClick={closeNavbar}>About Us</LoadingLink>
                       </li>
                       <li className="nav-item" role="none">
-                          <Link className="nav-link" href="/#services" role="menuitem">Our Services</Link>
+                          <LoadingLink className="nav-link" href="/#services" role="menuitem" onClick={closeNavbar}>Our Services</LoadingLink>
                       </li>
                       <li className="nav-item" role="none">
-                          <Link className="nav-link" href="/#portfolio" role="menuitem">Portfolio</Link>
+                          <LoadingLink className="nav-link" href="/portfolio" role="menuitem" onClick={closeNavbar}>Portfolio</LoadingLink>
                       </li>
                       <li className="nav-item" role="none">
-                          <Link className="nav-link" href="/clients" role="menuitem">Clients</Link>
+                          <LoadingLink className="nav-link" href="/clients" role="menuitem" onClick={closeNavbar}>Clients</LoadingLink>
                       </li>
                       <li className="nav-item" role="none">
-                          <Link className="nav-link" href="/blog" role="menuitem">Blog</Link>
+                          <LoadingLink className="nav-link" href="/blog" role="menuitem" onClick={closeNavbar}>Blog</LoadingLink>
                       </li>
                       <li className="nav-item" role="none">
-                          <Link className="nav-link" href="/#contact" role="menuitem">Contact</Link>
+                          <LoadingLink className="nav-link" href="/#contact" role="menuitem" onClick={closeNavbar}>Contact</LoadingLink>
                       </li>
                   
                   
                   <div className="navbar-actions ms-3">
-                      <Link href="/#contact" className="btn btn-primary" aria-label="Get started with our services" style={{ background: "var(--gradient-hero)", border: "0px" }}>Get Started</Link>
+                      <LoadingLink href="/#contact" className="btn btn-primary" aria-label="Get started with our services" style={{ background: "var(--gradient-hero)", border: "0px" }} onClick={closeNavbar}>Get Started</LoadingLink>
                   </div>
                   </ul>
               </div>

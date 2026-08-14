@@ -24,13 +24,32 @@ interface VideoPortfolio {
   technologies: string[];
 }
 
-function ProjectCard({ item, type, openEditModal, deleteItem }: { item: any, type: string, openEditModal: (i: any) => void, deleteItem: (i: number, t: any) => void }) {
+function ProjectCard({ item, type, openEditModal, deleteItem, homeSlot, onAssignSlot, homePortfolioLimit = 6 }: { item: any, type: string, openEditModal: (i: any) => void, deleteItem: (i: number, t: any) => void, homeSlot?: number | null, onAssignSlot?: (itemId: number, slot: number) => void, homePortfolioLimit?: number }) {
   const [imgError, setImgError] = useState(false);
   const isVideo = type !== 'images';
   const imgUrl = isVideo ? item.videoUrl.replace('.mp4', '.jpg') : item.image;
 
   return (
-    <div style={{ background: '#0f1117', border: '1px solid #2d3748', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: '#0f1117', border: '1px solid #2d3748', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      {type === 'images' && onAssignSlot && (
+        <div style={{ position: 'absolute', top: '8px', right: '8px', zIndex: 10 }}>
+          <select
+            value={homeSlot || ''}
+            onChange={(e) => onAssignSlot(item.id, parseInt(e.target.value))}
+            style={{ 
+              background: homeSlot ? '#f97316' : 'rgba(0,0,0,0.6)', 
+              color: '#fff', border: 'none', padding: '4px 8px', borderRadius: '6px', 
+              fontSize: '12px', cursor: 'pointer', outline: 'none',
+              fontWeight: homeSlot ? 700 : 400
+            }}
+          >
+            <option value="">{homeSlot ? 'Remove from Home' : 'Add to Home'}</option>
+            {Array(homePortfolioLimit).fill(0).map((_, i) => (
+              <option key={i} value={i + 1}>Slot {i + 1}</option>
+            ))}
+          </select>
+        </div>
+      )}
       <div style={{ height: '160px', overflow: 'hidden', backgroundColor: '#1a1d2e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {imgError || !imgUrl ? (
           <div style={{ color: '#4a5568', textAlign: 'center', padding: '20px' }}>
@@ -67,8 +86,12 @@ export default function PortfolioAdminClient() {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [categories, setCategories] = useState<any[]>([]);
   const [isCategoryManagerOpen, setIsCategoryManagerOpen] = useState(false);
+  const [isCategoryManagerLoading, setIsCategoryManagerLoading] = useState(false);
   const [statsConfig, setStatsConfig] = useState<string[]>(['all', 'social-media', 'digital-marketing', 'branding']);
   const [isSavingStats, setIsSavingStats] = useState(false);
+  const [homePortfolios, setHomePortfolios] = useState<any[]>(Array(6).fill(null));
+  const [homePortfolioLimit, setHomePortfolioLimit] = useState<number>(6);
+  const [isSavingHome, setIsSavingHome] = useState(false);
 
   const [images, setImages] = useState<Portfolio[]>([]);
   const [videos, setVideos] = useState<VideoPortfolio[]>([]);
@@ -90,20 +113,34 @@ export default function PortfolioAdminClient() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [imgRes, vidRes, catRes, statRes] = await Promise.all([
+      const [imgRes, vidRes, catRes, statRes, homeRes] = await Promise.all([
         fetch('/api/admin/portfolio'),
         fetch('/api/admin/portfolio/video'),
         fetch('/api/admin/portfolio/categories'),
-        fetch('/api/admin/portfolio/stats')
+        fetch('/api/admin/portfolio/stats'),
+        fetch('/api/admin/portfolio/home')
       ]);
       const imgData = await imgRes.json();
       const vidData = await vidRes.json();
       const catData = await catRes.json();
       const statData = await statRes.json();
+      const homeData = await homeRes.json();
+      
       setImages(imgData);
       setVideos(vidData);
       setCategories(catData);
       setStatsConfig(statData);
+      
+      if (homeData && !homeData.error) {
+        setHomePortfolioLimit(homeData.limit);
+        const newHomeArray = Array(6).fill(null);
+        homeData.homePortfolios.forEach((item: any) => {
+          if (item.order >= 1 && item.order <= 6) {
+            newHomeArray[item.order - 1] = item.portfolio;
+          }
+        });
+        setHomePortfolios(newHomeArray);
+      }
     } catch (err) {
       console.error("Failed to load data", err);
     }
@@ -216,6 +253,36 @@ export default function PortfolioAdminClient() {
     }
   };
 
+  const saveHomePortfolios = async (newLimit: number, newPortfolios: any[]) => {
+    // Validate that there are no empty slots up to the limit
+    for (let i = 0; i < newLimit; i++) {
+      if (!newPortfolios[i]) {
+        alert(`Cannot save: Slot ${i + 1} is empty. Please assign a project to all active slots.`);
+        return;
+      }
+    }
+
+    setIsSavingHome(true);
+    try {
+      const res = await fetch('/api/admin/portfolio/home', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ limit: newLimit, portfolios: newPortfolios.map(p => p ? p.id : null) })
+      });
+      if (res.ok) {
+        setHomePortfolioLimit(newLimit);
+        setHomePortfolios(newPortfolios);
+      } else {
+        alert("Failed to save home portfolios.");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error saving home portfolios.");
+    } finally {
+      setIsSavingHome(false);
+    }
+  };
+
   const deleteCategory = async (categoryId: string, subcategoryId?: string) => {
     let affectedCount = 0;
     if (subcategoryId) {
@@ -283,6 +350,38 @@ export default function PortfolioAdminClient() {
     setIsModalOpen(true);
   };
 
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+
+  const handleDrop = (index: number) => {
+    if (draggedIndex === null || draggedIndex === index) return;
+    const newArr = [...homePortfolios];
+    const temp = newArr[index];
+    newArr[index] = newArr[draggedIndex];
+    newArr[draggedIndex] = temp;
+    setHomePortfolios(newArr);
+    setDraggedIndex(null);
+  };
+
+  const handleAssignSlot = (portfolioId: number, slot: number) => {
+    let newArr = [...homePortfolios];
+    
+    if (slot && !isNaN(slot)) {
+      const slotIndex = slot - 1;
+      const portfolioObj = images.find(img => img.id === portfolioId);
+      
+      // Remove from any existing slot
+      newArr = newArr.map(p => p && p.id === portfolioId ? null : p);
+      
+      // Assign to new slot
+      newArr[slotIndex] = portfolioObj || null;
+    } else {
+      // Remove
+      newArr = newArr.map(p => p && p.id === portfolioId ? null : p);
+    }
+    
+    setHomePortfolios(newArr);
+  };
+
   // Styles
   const cardStyle: React.CSSProperties = {
     background: 'linear-gradient(135deg, #1a1d2e 0%, #16192a 100%)',
@@ -307,22 +406,29 @@ export default function PortfolioAdminClient() {
           <h1 style={{ fontSize: '26px', fontWeight: 800, color: '#fff', margin: 0 }}>Portfolio Management</h1>
           <p style={{ color: '#718096', fontSize: '14px', marginTop: '6px' }}>Manage image projects, video productions, and AI videos.</p>
         </div>
-        <button onClick={openNewModal} style={{
-          background: 'linear-gradient(135deg, #f97316, #ea580c)',
-          color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 20px',
-          fontSize: '14px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px'
-        }}>
-          <i className="fas fa-plus"></i> Add New Project
-        </button>
       </div>
 
       {/* Category Management Section */}
       <div style={cardStyle}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: isCategoryManagerOpen ? '24px' : '0' }}>
           <h2 style={{ color: '#fff', fontSize: '18px', margin: 0 }}><i className="fas fa-tags me-2"></i> Category Management</h2>
-          <button onClick={() => setIsCategoryManagerOpen(!isCategoryManagerOpen)} style={{
-            background: 'transparent', color: '#cbd5e0', border: '1px solid #4a5568', borderRadius: '8px', padding: '6px 12px', fontSize: '13px', cursor: 'pointer'
-          }}>
+          <button 
+            onClick={() => {
+              if (!isCategoryManagerOpen) {
+                setIsCategoryManagerLoading(true);
+                setTimeout(() => {
+                  setIsCategoryManagerLoading(false);
+                  setIsCategoryManagerOpen(true);
+                }, 400);
+              } else {
+                setIsCategoryManagerOpen(false);
+              }
+            }} 
+            disabled={isCategoryManagerLoading}
+            style={{
+              background: 'transparent', color: '#cbd5e0', border: '1px solid #4a5568', borderRadius: '8px', padding: '6px 12px', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px'
+            }}>
+            {isCategoryManagerLoading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" style={{ width: '12px', height: '12px' }}></span>}
             {isCategoryManagerOpen ? 'Close' : 'Manage Categories'}
           </button>
         </div>
@@ -423,18 +529,102 @@ export default function PortfolioAdminClient() {
         </button>
       </div>
 
-      {/* Tabs */}
-      <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
-        {['images', 'videos', 'ai-videos'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab as any)} style={{
-            background: activeTab === tab ? '#2d3748' : '#1a1d2e',
-            color: activeTab === tab ? '#fff' : '#a0aec0',
-            border: '1px solid #2d3748', borderRadius: '8px', padding: '8px 16px',
-            fontSize: '14px', fontWeight: 600, cursor: 'pointer', textTransform: 'capitalize'
-          }}>
-            {tab.replace('-', ' ')}
-          </button>
-        ))}
+      {/* Home Portfolio Preview Section */}
+      <div style={cardStyle}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <h2 style={{ color: '#fff', fontSize: '18px', margin: 0 }}><i className="fas fa-home me-2"></i> Home Page Portfolio Cards</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ color: '#a0aec0', fontSize: '14px' }}>Display Limit:</span>
+            <select 
+              value={homePortfolioLimit} 
+              onChange={(e) => setHomePortfolioLimit(parseInt(e.target.value))}
+              style={{ ...inputStyle, marginBottom: 0, width: 'auto' }}
+              disabled={isSavingHome}
+            >
+              <option value={3}>3 Cards</option>
+              <option value={6}>6 Cards</option>
+            </select>
+            <button 
+              onClick={() => saveHomePortfolios(homePortfolioLimit, homePortfolios)} 
+              disabled={isSavingHome} 
+              style={{ 
+                background: isSavingHome ? '#ed8936' : '#f97316', 
+                color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '6px', 
+                cursor: isSavingHome ? 'not-allowed' : 'pointer', 
+                fontSize: '13px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' 
+              }}
+            >
+              {isSavingHome ? <><i className="fas fa-spinner fa-spin"></i> Saving...</> : 'Save Configuration'}
+            </button>
+          </div>
+        </div>
+        <p style={{ color: '#a0aec0', fontSize: '13px', marginBottom: '16px' }}>
+          These are the fixed slots for the Home page. Drag and drop to shuffle them. To change a card, click the slot number tag on a project in the main list below.
+        </p>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+          {Array(6).fill(null).map((_, index) => (
+            <div 
+              key={index}
+              draggable
+              onDragStart={(e) => setDraggedIndex(index)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => handleDrop(index)}
+              style={{
+                height: '120px',
+                background: index < homePortfolioLimit ? '#0f1117' : '#1a1d2e',
+                border: index < homePortfolioLimit ? '2px dashed #4a5568' : '2px dashed #2d3748',
+                borderRadius: '8px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: '#718096',
+                cursor: 'grab',
+                position: 'relative',
+                overflow: 'hidden',
+                opacity: index < homePortfolioLimit ? 1 : 0.4
+              }}
+            >
+              <div style={{ position: 'absolute', top: '8px', left: '8px', background: 'rgba(0,0,0,0.6)', color: '#fff', padding: '2px 6px', borderRadius: '4px', fontSize: '12px', zIndex: 2 }}>
+                Slot {index + 1}
+              </div>
+              {homePortfolios[index] ? (
+                <>
+                  <img src={homePortfolios[index].image} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} />
+                  <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '0 10px', color: '#fff', fontWeight: 600, fontSize: '13px' }}>
+                    {homePortfolios[index].title}
+                  </div>
+                </>
+              ) : (
+                <div style={{ fontSize: '12px' }}>{index < homePortfolioLimit ? 'Empty Slot' : 'Hidden'}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tabs and Add Button */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          {['images', 'videos', 'ai-videos'].map(tab => (
+            <button key={tab} onClick={() => setActiveTab(tab as any)} style={{
+              background: activeTab === tab ? '#2d3748' : '#1a1d2e',
+              color: activeTab === tab ? '#fff' : '#a0aec0',
+              border: '1px solid #2d3748', borderRadius: '8px', padding: '8px 16px',
+              fontSize: '14px', fontWeight: 600, cursor: 'pointer', textTransform: 'capitalize'
+            }}>
+              {tab.replace('-', ' ')}
+            </button>
+          ))}
+        </div>
+        <button onClick={openNewModal} style={{
+          background: 'linear-gradient(135deg, #f97316, #ea580c)',
+          color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 20px',
+          fontSize: '14px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px'
+        }}>
+          <i className="fas fa-plus"></i> Add New Project
+        </button>
       </div>
 
       {/* List Area */}
@@ -525,9 +715,22 @@ export default function PortfolioAdminClient() {
                   if (activeFilter !== 'all' && img.category.toLowerCase() !== activeFilter.toLowerCase()) return false;
                   if (activeFilter === 'branding' && activeSubFilter !== 'all' && (img.subcategory?.toLowerCase() || 'uncategorized') !== activeSubFilter.toLowerCase()) return false;
                   return true;
-                }).map(img => (
-                  <ProjectCard key={img.id} item={img} type="images" openEditModal={openEditModal} deleteItem={deleteItem} />
-                ))}
+                }).map(img => {
+                  const homeSlotIndex = homePortfolios.findIndex(p => p && p.id === img.id);
+                  const homeSlot = homeSlotIndex !== -1 ? homeSlotIndex + 1 : null;
+                  return (
+                    <ProjectCard 
+                      key={img.id} 
+                      item={img} 
+                      type="images" 
+                      openEditModal={openEditModal} 
+                      deleteItem={deleteItem} 
+                      homeSlot={homeSlot}
+                      onAssignSlot={handleAssignSlot}
+                      homePortfolioLimit={homePortfolioLimit}
+                    />
+                  );
+                })}
               </div>
             )}
 
