@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link, { LinkProps } from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
@@ -12,7 +12,7 @@ interface LoadingLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEle
   showSpinner?: boolean;
 }
 
-export default function LoadingLink({ children, className, style, onClick, showSpinner = true, ...props }: LoadingLinkProps) {
+function LoadingLinkInner({ children, className, style, onClick, showSpinner = true, ...props }: LoadingLinkProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isPending, setIsPending] = useState(false);
@@ -52,5 +52,19 @@ export default function LoadingLink({ children, className, style, onClick, showS
         {children}
       </div>
     </Link>
+  );
+}
+
+export default function LoadingLink(props: LoadingLinkProps) {
+  return (
+    <Suspense fallback={
+      <Link {...props} className={props.className} style={props.style} onClick={props.onClick as any}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'inherit', gap: '8px' }}>
+          {props.children}
+        </div>
+      </Link>
+    }>
+      <LoadingLinkInner {...props} />
+    </Suspense>
   );
 }
