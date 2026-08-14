@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Link, { LinkProps } from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-interface LoadingLinkProps extends LinkProps {
+interface LoadingLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps>, LinkProps {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   showSpinner?: boolean;
 }
 
