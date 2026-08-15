@@ -52,11 +52,13 @@ model Example {
 }
 
 model SiteSettings {
-  id           Int      @id @default(autoincrement())
-  heroVideoUrl String?
-  aboutImageUrl String?
-  ceoImageUrl  String?
-  updatedAt    DateTime @updatedAt
+  id             Int      @id @default(autoincrement())
+  heroVideoUrl   String?
+  aboutImageUrl  String?
+  ceoImageUrl    String?
+  primaryColor   String?
+  secondaryColor String?
+  updatedAt      DateTime @updatedAt
 }
 
 model VideoPortfolio {

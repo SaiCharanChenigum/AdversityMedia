@@ -60,12 +60,25 @@ export default async function RootLayout({
   const headerLogo = siteData.headerLogo || "/assets/images/adversity-media-logo.png";
   const footerLogo = siteData.footerLogo || "/assets/images/adversity-media-logo-white.png";
 
+  const settings = await prisma.siteSettings.findFirst();
+  const primaryColor = settings?.primaryColor || "#2B4C8F";
+  const secondaryColor = settings?.secondaryColor || "#FF8C42";
+
   return (
     <html lang="en">
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+        <style>{`
+          :root {
+            --primary-blue: ${primaryColor} !important;
+            --accent-orange: ${secondaryColor} !important;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-purple) 100%) !important;
+            --gradient-accent: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-teal) 100%) !important;
+            --gradient-hero: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-purple) 50%, var(--accent-teal) 100%) !important;
+          }
+        `}</style>
       </head>
       <body className={`${inter.variable} ${poppins.variable}`}>
         <ClientLayoutWrapper 

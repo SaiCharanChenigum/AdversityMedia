@@ -15,6 +15,8 @@ export async function GET() {
       heroVideoUrl: settings?.heroVideoUrl || '',
       aboutImageUrl: settings?.aboutImageUrl || '',
       ceoImageUrl: settings?.ceoImageUrl || '',
+      primaryColor: settings?.primaryColor || '#2B4C8F',
+      secondaryColor: settings?.secondaryColor || '#FF8C42',
       headerLogo: siteData.headerLogo || '',
       footerLogo: siteData.footerLogo || '',
       yearsOfExcellence: siteData.yearsOfExcellence || '5',
@@ -42,6 +44,8 @@ export async function PUT(request: Request) {
       heroVideoUrl,
       aboutImageUrl,
       ceoImageUrl,
+      primaryColor,
+      secondaryColor,
       headerLogo,
       footerLogo,
       yearsOfExcellence,
@@ -61,11 +65,11 @@ export async function PUT(request: Request) {
     if (existingSettings) {
       await prisma.siteSettings.update({
         where: { id: existingSettings.id },
-        data: { heroVideoUrl, aboutImageUrl, ceoImageUrl },
+        data: { heroVideoUrl, aboutImageUrl, ceoImageUrl, primaryColor, secondaryColor },
       });
     } else {
       await prisma.siteSettings.create({
-        data: { heroVideoUrl, aboutImageUrl, ceoImageUrl },
+        data: { heroVideoUrl, aboutImageUrl, ceoImageUrl, primaryColor, secondaryColor },
       });
     }
 

@@ -30,6 +30,8 @@ interface HomeData {
   location: string;
   socialLinks: SocialLinks;
   services: Service[];
+  primaryColor: string;
+  secondaryColor: string;
 }
 
 const defaultData: HomeData = {
@@ -48,6 +50,8 @@ const defaultData: HomeData = {
   location: '',
   socialLinks: { facebook: '', instagram: '', linkedin: '', twitter: '' },
   services: [],
+  primaryColor: '#2B4C8F',
+  secondaryColor: '#FF8C42',
 };
 
 
@@ -255,6 +259,27 @@ export default function HomeAdminClient() {
       <div style={{ marginBottom: '32px' }}>
         <h1 style={{ fontSize: '26px', fontWeight: 800, color: '#fff', margin: 0 }}>Home Page Settings</h1>
         <p style={{ color: '#718096', fontSize: '14px', marginTop: '6px' }}>Manage all dynamic content shown on the home page</p>
+      </div>
+
+      {/* 0. Color Theme */}
+      <div style={card}>
+        <div style={sectionTitle}><i className="fas fa-palette" style={{ color: '#f97316' }}></i> Website Color Theme</div>
+        <div style={grid2}>
+          <div>
+            <span style={label}>Primary Color (Gradients & Accents)</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <input type="color" value={data.primaryColor} onChange={e => set('primaryColor', e.target.value)} style={{ width: '50px', height: '40px', padding: '0', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'transparent' }} />
+              <input type="text" value={data.primaryColor} onChange={e => set('primaryColor', e.target.value)} style={{ ...inputStyle, width: '120px' }} />
+            </div>
+          </div>
+          <div>
+            <span style={label}>Secondary Color (Buttons & Highlights)</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <input type="color" value={data.secondaryColor} onChange={e => set('secondaryColor', e.target.value)} style={{ width: '50px', height: '40px', padding: '0', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'transparent' }} />
+              <input type="text" value={data.secondaryColor} onChange={e => set('secondaryColor', e.target.value)} style={{ ...inputStyle, width: '120px' }} />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* 1. Logos */}
